@@ -1,0 +1,229 @@
+{
+  "crowdworks": [
+    {
+      "id": "cw_web_design",
+      "name": "Webデザイン",
+      "priceRange": { "min": 50000, "max": 300000, "unit": "円/ページ", "note": "LP制作：100,000円〜、Webデザイン：50,000円〜" },
+      "subcategories": [
+        { "name": "Webサイトデザイン", "priceRange": { "min": 50000, "max": 300000, "unit": "円/ページ" } },
+        { "name": "LP（ランディングページ）デザイン", "priceRange": { "min": 100000, "max": 500000, "unit": "円/ページ" } },
+        { "name": "バナー・サムネイルデザイン", "priceRange": { "min": 5000, "max": 50000, "unit": "円" } },
+        { "name": "UI/UXデザイン", "priceRange": { "min": 50000, "max": 300000, "unit": "円" } },
+        { "name": "ワイヤーフレーム作成", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "cw_system_dev",
+      "name": "システム開発・プログラミング",
+      "priceRange": { "min": 100000, "max": 1000000, "unit": "円", "note": "Webシステム：100,000円〜、WordPress：100,000円〜" },
+      "subcategories": [
+        { "name": "Webシステム開発", "priceRange": { "min": 100000, "max": 1000000, "unit": "円" } },
+        { "name": "WordPressカスタマイズ", "priceRange": { "min": 100000, "max": 500000, "unit": "円" } },
+        { "name": "ECサイト構築・修正", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } },
+        { "name": "業務システム開発", "priceRange": { "min": 100000, "max": 1000000, "unit": "円" } },
+        { "name": "API連携・開発", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "cw_app_dev",
+      "name": "スマホアプリ開発",
+      "priceRange": { "min": 300000, "max": 2000000, "unit": "円", "note": "iPhone・Androidアプリ：300,000円〜" },
+      "subcategories": [
+        { "name": "iOSアプリ開発", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
+        { "name": "Androidアプリ開発", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
+        { "name": "クロスプラットフォーム開発", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "cw_video",
+      "name": "動画・映像編集",
+      "priceRange": { "min": 3000, "max": 120000, "unit": "円/本", "note": "YouTube：8,000円〜/本、TikTok・ショート：3,000円〜/本、映像制作：120,000円〜/本" },
+      "subcategories": [
+        { "name": "YouTube動画編集", "priceRange": { "min": 8000, "max": 50000, "unit": "円/本" } },
+        { "name": "TikTok・ショート動画編集", "priceRange": { "min": 3000, "max": 15000, "unit": "円/本" } },
+        { "name": "映像編集・制作", "priceRange": { "min": 120000, "max": 1000000, "unit": "円/本" } },
+        { "name": "アニメーション・モーショングラフィックス", "priceRange": { "min": 150000, "max": 1000000, "unit": "円" } },
+        { "name": "字幕・テロップ作成", "priceRange": { "min": 3000, "max": 20000, "unit": "円/本" } }
+      ]
+    },
+    {
+      "id": "cw_design",
+      "name": "グラフィックデザイン",
+      "priceRange": { "min": 5000, "max": 100000, "unit": "円", "note": "ロゴ：30,000円〜、バナー：5,000円〜、イラスト：30,000円〜" },
+      "subcategories": [
+        { "name": "ロゴ・名刺デザイン", "priceRange": { "min": 20000, "max": 100000, "unit": "円" } },
+        { "name": "チラシ・パンフレットデザイン", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } },
+        { "name": "SNS投稿デザイン", "priceRange": { "min": 5000, "max": 30000, "unit": "円" } },
+        { "name": "パッケージデザイン", "priceRange": { "min": 35000, "max": 200000, "unit": "円" } },
+        { "name": "イラスト作成", "priceRange": { "min": 30000, "max": 150000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "cw_writing",
+      "name": "ライティング・記事作成",
+      "priceRange": { "min": 1, "max": 10, "unit": "円/文字", "note": "記事：1円〜/文字、リライト：3,000円〜/記事、キャッチコピー：10,000円〜" },
+      "subcategories": [
+        { "name": "Webライティング・SEO記事", "priceRange": { "min": 1, "max": 5, "unit": "円/文字" } },
+        { "name": "コピーライティング", "priceRange": { "min": 10000, "max": 100000, "unit": "円" } },
+        { "name": "SNS投稿文作成", "priceRange": { "min": 1000, "max": 10000, "unit": "円/本" } },
+        { "name": "商品説明文・LP文章", "priceRange": { "min": 10000, "max": 100000, "unit": "円" } },
+        { "name": "プレスリリース・メルマガ", "priceRange": { "min": 1, "max": 5, "unit": "円/文字" } }
+      ]
+    },
+    {
+      "id": "cw_marketing",
+      "name": "マーケティング・SNS",
+      "priceRange": { "min": 1200, "max": 5000, "unit": "円/時間", "note": "SNS運用：1,200円〜/時間、Webディレクション：2,000円〜/時間" },
+      "subcategories": [
+        { "name": "SNS運用・Instagram", "priceRange": { "min": 1200, "max": 3000, "unit": "円/時間" } },
+        { "name": "広告運用（Google/Meta）", "priceRange": { "min": 2000, "max": 5000, "unit": "円/時間" } },
+        { "name": "SEO対策", "priceRange": { "min": 30000, "max": 200000, "unit": "円/月" } },
+        { "name": "コンテンツマーケティング", "priceRange": { "min": 30000, "max": 200000, "unit": "円/月" } },
+        { "name": "インフルエンサー施策", "priceRange": { "min": 30000, "max": 500000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "cw_photo",
+      "name": "写真・撮影",
+      "priceRange": { "min": 20000, "max": 100000, "unit": "円", "note": "写真撮影：20,000円〜、写真加工：1,000円〜/枚" },
+      "subcategories": [
+        { "name": "商品・物撮り", "priceRange": { "min": 20000, "max": 100000, "unit": "円" } },
+        { "name": "人物・モデル撮影", "priceRange": { "min": 30000, "max": 200000, "unit": "円" } },
+        { "name": "写真レタッチ・加工", "priceRange": { "min": 1000, "max": 5000, "unit": "円/枚" } }
+      ]
+    },
+    {
+      "id": "cw_translation",
+      "name": "翻訳・通訳",
+      "priceRange": { "min": 6, "max": 15, "unit": "円/文字", "note": "英語・中国語・韓国語翻訳：6円〜/文字" },
+      "subcategories": [
+        { "name": "日英翻訳", "priceRange": { "min": 6, "max": 15, "unit": "円/文字" } },
+        { "name": "英日翻訳", "priceRange": { "min": 6, "max": 15, "unit": "円/文字" } },
+        { "name": "多言語翻訳", "priceRange": { "min": 6, "max": 20, "unit": "円/文字" } }
+      ]
+    },
+    {
+      "id": "cw_data",
+      "name": "データ入力・調査",
+      "priceRange": { "min": 1000, "max": 5000, "unit": "円/時間", "note": "データ入力：1,000円〜/時間" },
+      "subcategories": [
+        { "name": "データ入力・整理", "priceRange": { "min": 1000, "max": 3000, "unit": "円/時間" } },
+        { "name": "リサーチ・市場調査", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } },
+        { "name": "スクレイピング・データ収集", "priceRange": { "min": 50000, "max": 300000, "unit": "円" } }
+      ]
+    }
+  ],
+  "lancers": [
+    {
+      "id": "la_web_design",
+      "name": "Webデザイン",
+      "priceRange": { "min": 50000, "max": 400000, "unit": "円", "note": "LP制作：50,000〜100,000円、ホームページ：50,000〜400,000円" },
+      "subcategories": [
+        { "name": "Webサイトデザイン", "priceRange": { "min": 50000, "max": 400000, "unit": "円" } },
+        { "name": "LP制作", "priceRange": { "min": 50000, "max": 100000, "unit": "円" } },
+        { "name": "バナー制作", "priceRange": { "min": 10000, "max": 40000, "unit": "円" } },
+        { "name": "UI/UXデザイン", "priceRange": { "min": 150000, "max": 200000, "unit": "円" } },
+        { "name": "ワイヤーフレーム", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "la_web_dev",
+      "name": "Web制作・開発",
+      "priceRange": { "min": 50000, "max": 800000, "unit": "円", "note": "WordPress：50,000〜200,000円、Webシステム：3,500〜7,000円/時間" },
+      "subcategories": [
+        { "name": "Webサイト制作", "priceRange": { "min": 50000, "max": 400000, "unit": "円" } },
+        { "name": "WordPress", "priceRange": { "min": 50000, "max": 200000, "unit": "円" } },
+        { "name": "ECサイト", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } },
+        { "name": "フロントエンド開発", "priceRange": { "min": 3500, "max": 7000, "unit": "円/時間" } },
+        { "name": "バックエンド開発", "priceRange": { "min": 3500, "max": 7000, "unit": "円/時間" } }
+      ]
+    },
+    {
+      "id": "la_app_dev",
+      "name": "アプリ開発",
+      "priceRange": { "min": 300000, "max": 2000000, "unit": "円", "note": "モバイルアプリ：300,000〜2,000,000円" },
+      "subcategories": [
+        { "name": "iOSアプリ", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
+        { "name": "Androidアプリ", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
+        { "name": "Webアプリ", "priceRange": { "min": 100000, "max": 800000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "la_video",
+      "name": "動画・アニメ",
+      "priceRange": { "min": 5000, "max": 500000, "unit": "円", "note": "YouTube：5,000〜30,000円/本、ショート動画：5,000〜10,000円/本" },
+      "subcategories": [
+        { "name": "動画編集", "priceRange": { "min": 5000, "max": 30000, "unit": "円/本" } },
+        { "name": "アニメーション制作", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } },
+        { "name": "YouTube・SNS動画", "priceRange": { "min": 5000, "max": 30000, "unit": "円/本" } },
+        { "name": "ショート動画", "priceRange": { "min": 5000, "max": 10000, "unit": "円/本" } },
+        { "name": "サムネイル作成", "priceRange": { "min": 3000, "max": 15000, "unit": "円/枚" } }
+      ]
+    },
+    {
+      "id": "la_design",
+      "name": "デザイン・イラスト",
+      "priceRange": { "min": 25000, "max": 106500, "unit": "円", "note": "ロゴ：25,000〜85,000円、チラシ：62,500〜106,500円" },
+      "subcategories": [
+        { "name": "ロゴ制作", "priceRange": { "min": 25000, "max": 85000, "unit": "円" } },
+        { "name": "チラシ・印刷物", "priceRange": { "min": 62500, "max": 106500, "unit": "円" } },
+        { "name": "SNS用デザイン", "priceRange": { "min": 5000, "max": 30000, "unit": "円" } },
+        { "name": "イラスト・キャラクター", "priceRange": { "min": 30000, "max": 50000, "unit": "円" } },
+        { "name": "パッケージデザイン", "priceRange": { "min": 50000, "max": 200000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "la_writing",
+      "name": "ライティング・翻訳",
+      "priceRange": { "min": 0.5, "max": 5, "unit": "円/文字", "note": "記事：0.5〜5.0円/文字、キャッチコピー：30,000〜60,000円" },
+      "subcategories": [
+        { "name": "記事・ブログ作成", "priceRange": { "min": 0.5, "max": 5, "unit": "円/文字" } },
+        { "name": "コピーライティング", "priceRange": { "min": 30000, "max": 60000, "unit": "円" } },
+        { "name": "SNS文章作成", "priceRange": { "min": 5000, "max": 30000, "unit": "円/月" } },
+        { "name": "翻訳", "priceRange": { "min": 5, "max": 8, "unit": "円/ワード" } },
+        { "name": "校正・校閲", "priceRange": { "min": 10000, "max": 50000, "unit": "円/記事" } }
+      ]
+    },
+    {
+      "id": "la_marketing",
+      "name": "マーケティング",
+      "priceRange": { "min": 50000, "max": 300000, "unit": "円/月", "note": "SNS運用代行：50,000〜300,000円/月" },
+      "subcategories": [
+        { "name": "SNS運用", "priceRange": { "min": 50000, "max": 300000, "unit": "円/月" } },
+        { "name": "広告運用", "priceRange": { "min": 100000, "max": 300000, "unit": "円/月" } },
+        { "name": "SEO・コンテンツ", "priceRange": { "min": 50000, "max": 200000, "unit": "円/月" } },
+        { "name": "マーケティング戦略", "priceRange": { "min": 150000, "max": 300000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "la_photo",
+      "name": "写真・撮影",
+      "priceRange": { "min": 5000, "max": 20000, "unit": "円/時間", "note": "写真撮影：5,000〜20,000円/時間、画像加工：100〜5,000円/枚" },
+      "subcategories": [
+        { "name": "商品撮影", "priceRange": { "min": 5000, "max": 20000, "unit": "円/時間" } },
+        { "name": "人物撮影", "priceRange": { "min": 5000, "max": 20000, "unit": "円/時間" } },
+        { "name": "写真加工・レタッチ", "priceRange": { "min": 100, "max": 5000, "unit": "円/枚" } }
+      ]
+    },
+    {
+      "id": "la_business",
+      "name": "ビジネス・コンサル",
+      "priceRange": { "min": 100000, "max": 300000, "unit": "円", "note": "経営コンサル：150,000〜300,000円、Web/ITコンサル：100,000〜200,000円" },
+      "subcategories": [
+        { "name": "事業計画・資料作成", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } },
+        { "name": "データ分析・調査", "priceRange": { "min": 50000, "max": 200000, "unit": "円" } },
+        { "name": "業務効率化・DX", "priceRange": { "min": 100000, "max": 300000, "unit": "円" } }
+      ]
+    },
+    {
+      "id": "la_data",
+      "name": "データ・リサーチ",
+      "priceRange": { "min": 1000, "max": 10000, "unit": "円/100件", "note": "データ収集・入力：1,000〜10,000円/100件" },
+      "subcategories": [
+        { "name": "データ入力", "priceRange": { "min": 1000, "max": 5000, "unit": "円/100件" } },
+        { "name": "リサーチ・調査", "priceRange": { "min": 5000, "max": 30000, "unit": "円" } },
+        { "name": "データ収集・整理", "priceRange": { "min": 1000, "max": 10000, "unit": "円/100件" } }
+      ]
+    }
+  ]
+}

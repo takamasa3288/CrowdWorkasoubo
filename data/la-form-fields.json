@@ -1,0 +1,596 @@
+[
+  {
+    "type": "text",
+    "name": "",
+    "label": "",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "text",
+    "name": "data[Work][title]",
+    "label": "例: 資格教材ビデオのナレーション業務",
+    "required": true,
+    "placeholder": "例: 資格教材ビデオのナレーション業務",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][industry_type_id]",
+    "label": "data[Work][industry_type_id]",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "依頼主の業種を選択",
+      "IT・通信・インターネット",
+      "マスコミ・メディア",
+      "新聞・雑誌・出版",
+      "広告・イベント・プロモーション",
+      "芸能・エンターテイメント",
+      "ゲーム・アニメ・玩具",
+      "恋愛・出会い・占い",
+      "婚活・ブライダル",
+      "動物・ペット",
+      "生花・園芸・造園",
+      "美術・工芸・音楽",
+      "スポーツ・フィットネス",
+      "自動車・バイク",
+      "旅行・観光・グルメ",
+      "ホテル・旅館・民泊",
+      "メーカー",
+      "商社",
+      "流通・運輸・交通",
+      "工業・製造",
+      "卸売・小売",
+      "ファッション・アパレル",
+      "家具・インテリア",
+      "食品・飲料・たばこ",
+      "医療・医薬",
+      "介護・福祉",
+      "家事代行",
+      "葬祭",
+      "金融・保険",
+      "住宅・不動産",
+      "建築・工務店",
+      "店舗（飲食店・居酒屋など）",
+      "美容室・サロン",
+      "資格・習い事",
+      "保育園・幼稚園",
+      "塾・予備校",
+      "大学・学校",
+      "学術・研究",
+      "リサーチ・調査",
+      "コンサルティング・シンクタンク",
+      "士業（個人事務所）",
+      "人材紹介・人材派遣",
+      "翻訳・通訳",
+      "エネルギー（電気・ガス・水道など）",
+      "農林・水産・鉱業",
+      "清掃・設備・警備",
+      "公益・非営利団体",
+      "官公庁・自治体",
+      "政治",
+      "宗教"
+    ]
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "初心者OK",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "経験者優遇",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "カンタン",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "継続依頼あり",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "大量募集",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "長期",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "高単価",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "品質重視",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "スピード重視",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "スムーズな連絡",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "提案を即決",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "法人可",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "納期応相談",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkSpecialNote][notes][]",
+    "label": "報酬応相談",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "number",
+    "name": "data[Work][recruiting_number]",
+    "label": "data[Work][recruiting_number]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "textarea",
+    "name": "data[WorkDescription][goal]",
+    "label": "例: 秘書検定準１級の対策テキストの付属DVDのナレーションを作成していただきたいです。",
+    "required": false,
+    "placeholder": "例: 秘書検定準１級の対策テキストの付属DVDのナレーションを作成していただきたいです。",
+    "options": []
+  },
+  {
+    "type": "text",
+    "name": "data[WorkDescription][camera_working_time]",
+    "label": "data[WorkDescription][camera_working_time]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][deadline]",
+    "label": "data[Work][deadline]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "1日後 (2026年03月21日) に締め切る",
+      "2日後 (2026年03月22日) に締め切る",
+      "3日後 (2026年03月23日) に締め切る",
+      "4日後 (2026年03月24日) に締め切る",
+      "5日後 (2026年03月25日) に締め切る",
+      "6日後 (2026年03月26日) に締め切る",
+      "7日後 (2026年03月27日) に締め切る"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][budget_fixed]",
+    "label": "data[Work][budget_fixed]",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "1千円 〜 5千円",
+      "5千円 〜 1万円",
+      "1万円 ～ 2万円",
+      "2万円 ～ 5万円",
+      "5万円 ～ 10万円",
+      "10万円 ～ 20万円",
+      "20万円 〜 30万円",
+      "30万円 ～ 50万円",
+      "50万円 ～ 100万円",
+      "100万円 ～ 300万円",
+      "300万円 ～ 500万円",
+      "500万円以上"
+    ]
+  },
+  {
+    "type": "radio",
+    "name": "data[Work][withholding]",
+    "label": "源泉徴収をする",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "data[Work][withholding]",
+    "label": "源泉徴収をしない",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][budget_hourly]",
+    "label": "data[Work][budget_hourly]",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "900円 - 1,000円 / 時間",
+      "1,000円 - 1,500円 / 時間",
+      "1,500円 - 2,000円 / 時間",
+      "2,000円 - 3,000円 / 時間",
+      "3,000円 - 4,000円 / 時間",
+      "4,000円 - 5,000円 / 時間",
+      "5,000円 / 時間 以上"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][weekly_hours]",
+    "label": "data[Work][weekly_hours]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "10時間未満",
+      "10 - 30時間",
+      "30時間以上"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][time_period]",
+    "label": "data[Work][time_period]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "1週間未満",
+      "1ヶ月未満",
+      "1 - 3ヶ月",
+      "3 - 6ヶ月",
+      "6ヶ月以上"
+    ]
+  },
+  {
+    "type": "radio",
+    "name": "data[Work][subcontract]",
+    "label": "下請法またはフリーランス法に沿って取引する",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "data[Work][subcontract]",
+    "label": "下請法とフリーランス法の対象取引ではない",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][inspection_period]",
+    "label": "data[Work][inspection_period]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][deliveried][year]",
+    "label": "data[Work][deliveried][year]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "2027",
+      "2026"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][deliveried][month]",
+    "label": "data[Work][deliveried][month]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "data[Work][deliveried][day]",
+    "label": "data[Work][deliveried][day]",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31"
+    ]
+  },
+  {
+    "type": "radio",
+    "name": "data[WorkContractCreateForm][is_request_work_contract]",
+    "label": "登録する",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "data[WorkContractCreateForm][is_request_work_contract]",
+    "label": "登録しない",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[WorkContractCreateForm][is_need_stamp]",
+    "label": "押印ありの契約書提出を依頼する",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "data[WorkContractCreateForm][is_original]",
+    "label": "テンプレートを利用",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "data[WorkContractCreateForm][is_original]",
+    "label": "独自の契約書を利用",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][participant_only]",
+    "label": "完全非公開 オプション ＋ 18,000 円 (税抜) 検索エンジンから非公開かつ、NDA遵守を宣言するランサーのみ閲覧・提案できます 提案募集中はNDA遵守を宣言するランサーズ会員のみ閲覧・提案でき、仕事終了後はお客様と採用者のみ閲覧できます。",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][close]",
+    "label": "非公開 オプション ＋ 10,000 円 (税抜) 依頼をGoogleやYahooといった検索エンジンから非公開にします 依頼をGoogleやYahooといった検索エンジンから非公開にできますが、仕事終了後もランサーズ会員であればランサーズ上で依頼を閲覧することができます。",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][ad_diamond]",
+    "label": "PRダイヤモンド オプション ＋ 20,000 円 (税抜) 仕事一覧ページの最上部のPR専用枠に表示します 非常に多くのランサー（提案者）の目に触れるため、提案の大幅な増加が見込めます。",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][ad_platinum]",
+    "label": "PRプラチナ オプション ＋ 12,000 円 (税抜) 仕事一覧ページの中部のPR専用枠に表示します",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][ad_gold]",
+    "label": "PRゴールド オプション ＋ 10,000 円 (税抜) 仕事一覧ページの下部のPR専用枠に表示します",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][hurry]",
+    "label": "急募 オプション ＋ 9,000 円 (税抜) 仕事一覧ページにて目立つ急募ラベルを表示します 多くのランサーが最優先で提案すべき依頼であると認識します。短期間に多くの提案・見積もりが欲しい場合にオススメです。 無料チケット残り 2026年04月30日まで有効 月次で利用回数がリセットされます。繰り越しはされません。 1/1 枚",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][feature]",
+    "label": "注目 オプション ＋ 3,000 円 (税抜) 仕事一覧ページにて注目ラベルを表示します",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][mypage_option]",
+    "label": "マイページ表示 オプション ＋ 36,000 円 (税抜) マイページの最上部のPR専用枠に表示します ランサーが毎日閲覧するマイページに、ご依頼を掲載します。閲覧数が2倍以上になり、オプションの中で最も提案数が増加します。",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][expert_users_mail]",
+    "label": "認定ランサーへの一斉通知 オプション ＋ 20,000 円 (税抜) 認定ランサー全員メールでダイレクトに告知・宣伝します 豊富な実績を持ち、発注者から高評価を得ている高スキルな認定ランサー全員にメールでダイレクトに告知・宣伝します。サイトを見ていない認定ランサーにも届くので質の高い提案の増加が見込めます。",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Option][mail]",
+    "label": "ランサー100人への一斉通知 オプション ＋ 8,000 円 (税抜) カテゴリーの上位ランサーにメールでダイレクトに告知・宣伝します 依頼するお仕事のカテゴリーにおいて、上位100名にメールでダイレクトに告知・宣伝します。",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Work][feedback]",
+    "label": "評価が＋以上 良い評価実績が+1以上のランサー",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Work][lancers_check]",
+    "label": "ランサーズチェック済 働き方の質問に回答済みのランサー",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Work][identification]",
+    "label": "本人確認済 身元が確実なランサー",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "data[Work][private]",
+    "label": "特定のユーザー",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "text",
+    "name": "data[Work][invited_user]",
+    "label": "指定するユーザー名を入力してください",
+    "required": false,
+    "placeholder": "指定するユーザー名を入力してください",
+    "options": []
+  },
+  {
+    "type": "button",
+    "name": "",
+    "label": "",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "submit",
+    "name": "confirm",
+    "label": "confirm",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  }
+]

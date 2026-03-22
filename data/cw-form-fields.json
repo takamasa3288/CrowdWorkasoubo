@@ -1,0 +1,498 @@
+[
+  {
+    "type": "text",
+    "name": "",
+    "label": "キーワードでカテゴリを検索できます！",
+    "required": false,
+    "placeholder": "キーワードでカテゴリを検索できます！",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer_type",
+    "label": "job_offer_type",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[payment_type]",
+    "label": "固定報酬制",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[payment_type]",
+    "label": "時間単価制",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[payment_type]",
+    "label": "支払い方式",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[payment_type]",
+    "label": "支払い方式",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "project_contract_hope_number",
+    "label": "1人",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "project_contract_hope_number",
+    "label": "2人以上",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "number",
+    "name": "project_contract_hope_number_field",
+    "label": "2人以上",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "budget_type",
+    "label": "金額を範囲で指定する",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "budget",
+    "label": "金額を範囲で指定する",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "選択してください",
+      "5千円未満",
+      "5千円 〜 1万円",
+      "1万円 〜 3万円",
+      "3万円 〜 5万円",
+      "5万円 〜 10万円",
+      "10万円 〜 15万円",
+      "15万円 〜 20万円",
+      "20万円 〜 25万円",
+      "25万円 〜 30万円",
+      "30万円 〜 40万円",
+      "40万円 〜 50万円",
+      "50万円 〜 100万円",
+      "100万円以上"
+    ]
+  },
+  {
+    "type": "radio",
+    "name": "budget_type",
+    "label": "特定の金額を入力する",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "number",
+    "name": "exact_budget",
+    "label": "特定の金額を入力する",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "budget_type",
+    "label": "指定しない（ワーカーと相談して決める）",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "hourly_wage",
+    "label": "時間単価",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "700円 〜 1,000円",
+      "1,000円 〜 1,500円",
+      "1,500円 〜 2,000円",
+      "2,000円 〜 3,000円",
+      "3,000円 〜 4,000円",
+      "4,000円 〜 5,000円",
+      "5,000円以上"
+    ]
+  },
+  {
+    "type": "number",
+    "name": "job_offer[hours_limit]",
+    "label": "週の稼動と依頼期間",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "job_offer[duration]",
+    "label": "週の稼動と依頼期間",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "1週間以内",
+      "1週間〜1ヶ月",
+      "1ヶ月〜3ヶ月",
+      "3ヶ月〜6ヶ月",
+      "6ヶ月以上"
+    ]
+  },
+  {
+    "type": "number",
+    "name": "job_offer[task_attributes][price_without_sales_tax]",
+    "label": "作業単価・件数",
+    "required": true,
+    "placeholder": "300",
+    "options": []
+  },
+  {
+    "type": "number",
+    "name": "job_offer[task_attributes][num_tasks]",
+    "label": "作業単価・件数",
+    "required": true,
+    "placeholder": "10",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[task_attributes][limit_num_tasks_enabled_flag]",
+    "label": "job_offer[task_attributes][limit_num_tasks_enabled_flag]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[task_attributes][limit_num_tasks_enabled_flag]",
+    "label": "job_offer[task_attributes][limit_num_tasks_enabled_flag]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "number",
+    "name": "job_offer[task_attributes][limit_num_tasks]",
+    "label": "job_offer[task_attributes][limit_num_tasks]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[competition_attributes][price_without_sales_tax]",
+    "label": "エコノミー",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[competition_attributes][price_without_sales_tax]",
+    "label": "ベーシック",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[competition_attributes][price_without_sales_tax]",
+    "label": "スタンダード",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[competition_attributes][price_without_sales_tax]",
+    "label": "プレミアム",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "radio",
+    "name": "job_offer[competition_attributes][price_without_sales_tax]",
+    "label": "カスタム",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "number",
+    "name": "competition_price_without_sales_tax_custom",
+    "label": "カスタム",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "select-one",
+    "name": "job_offer[expired_on]",
+    "label": "応募期限",
+    "required": true,
+    "placeholder": "",
+    "options": [
+      "0日後 - 2026年03月20日(金) 24:00",
+      "1日後 - 2026年03月21日(土) 24:00",
+      "2日後 - 2026年03月22日(日) 24:00",
+      "3日後 - 2026年03月23日(月) 24:00",
+      "4日後 - 2026年03月24日(火) 24:00",
+      "5日後 - 2026年03月25日(水) 24:00",
+      "6日後 - 2026年03月26日(木) 24:00",
+      "7日後 - 2026年03月27日(金) 24:00",
+      "8日後 - 2026年03月28日(土) 24:00",
+      "9日後 - 2026年03月29日(日) 24:00",
+      "10日後 - 2026年03月30日(月) 24:00",
+      "11日後 - 2026年03月31日(火) 24:00",
+      "12日後 - 2026年04月01日(水) 24:00",
+      "13日後 - 2026年04月02日(木) 24:00",
+      "14日後 - 2026年04月03日(金) 24:00"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "job_offer[deadline(1i)]",
+    "label": "納品希望日",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "年",
+      "2026",
+      "2027"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "job_offer[deadline(2i)]",
+    "label": "納品希望日",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "月",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+    ]
+  },
+  {
+    "type": "select-one",
+    "name": "job_offer[deadline(3i)]",
+    "label": "納品希望日",
+    "required": false,
+    "placeholder": "",
+    "options": [
+      "日",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31"
+    ]
+  },
+  {
+    "type": "text",
+    "name": "",
+    "label": "納品希望日",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[urgent]",
+    "label": "options[urgent]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[extend_job_offer]",
+    "label": "options[extend_job_offer]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "job_offer[closed_flag]",
+    "label": "job_offer[closed_flag]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[highlight_mypage_display]",
+    "label": "options[highlight_mypage_display]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[highlight_diamond]",
+    "label": "options[highlight_diamond]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[highlight_platinum]",
+    "label": "options[highlight_platinum]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[highlight_gold]",
+    "label": "options[highlight_gold]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[callings]",
+    "label": "options[callings]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[callings_pro_crowdworkers]",
+    "label": "options[callings_pro_crowdworkers]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[login_required]",
+    "label": "options[login_required]",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[login_required_and_closed_competition]",
+    "label": "options[login_required_and_closed_competition]",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[identity_verification_required]",
+    "label": "options[identity_verification_required]",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[non_disclosure_agreement]",
+    "label": "options[non_disclosure_agreement]",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "job_offer[custom_fields][hide_proposal_products_flag]",
+    "label": "job_offer[custom_fields][hide_proposal_products_flag]",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "options[private_task]",
+    "label": "options[private_task]",
+    "required": true,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "job_offer[competition_attributes][contract_guarantee_flag]",
+    "label": "job_offer[competition_attributes][contract_guarantee_flag]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  },
+  {
+    "type": "checkbox",
+    "name": "job_offer[task_attributes][check_rate_accepted_tasks_flag]",
+    "label": "job_offer[task_attributes][check_rate_accepted_tasks_flag]",
+    "required": false,
+    "placeholder": "",
+    "options": []
+  }
+]
