@@ -273,13 +273,13 @@ interface PriceRange {
 
 interface Subcategory {
   name: string;
-  priceRange: PriceRange;
+  priceRange?: PriceRange;
 }
 
 interface Category {
   id: string;
   name: string;
-  priceRange: PriceRange;
+  priceRange?: PriceRange;
   subcategories: Subcategory[];
 }
 
@@ -366,14 +366,14 @@ export default function Home() {
     setSelectedSubcategory(null);
     setBudget("");
     setPaymentType(null);
-    if (cat) setBudgetUnit(cat.priceRange.unit);
+    if (cat?.priceRange) setBudgetUnit(cat.priceRange.unit);
   };
 
   const handleSubcategoryChange = (subName: string) => {
     const sub = selectedCategory?.subcategories.find((s) => s.name === subName) || null;
     setSelectedSubcategory(sub);
     setBudget("");
-    if (sub) setBudgetUnit(sub.priceRange.unit);
+    if (sub?.priceRange) setBudgetUnit(sub.priceRange.unit);
   };
 
   const handleGenerate = async () => {
