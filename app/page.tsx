@@ -3,34 +3,38 @@
 import { useState, useRef, useCallback } from "react";
 import categories from "@/data/categories.json";
 
-// 音声入力フック
+// 音声入力フック（プッシュトゥトーク + AI整形）
 function useVoiceInput(onResult: (text: string) => void) {
   const [isRecording, setIsRecording] = useState(false);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const [isCleaning, setIsCleaning] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null);
+  const transcriptRef = useRef<string>("");
 
-  const toggle = useCallback(() => {
-    if (isRecording) {
-      recognitionRef.current?.stop();
-      setIsRecording(false);
-      return;
-    }
+  const start = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
-    const SpeechRecognition =
-      window.SpeechRecognition || (window as unknown as { webkitSpeechRecognition: typeof window.SpeechRecognition }).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
+    if (!SR) {
       alert("このブラウザは音声入力に対応していません（Chrome推奨）");
       return;
     }
 
-    const recognition = new SpeechRecognition();
+    transcriptRef.current = "";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const recognition = new SR() as any;
     recognition.lang = "ja-JP";
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+    recognition.interimResults = true; // 中間結果も取得（これがないと長文が拾えない）
+    recognition.continuous = true;
 
-    recognition.onresult = (e) => {
-      const transcript = e.results[0][0].transcript;
-      onResult(transcript);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    recognition.onresult = (e: any) => {
+      // 確定済み＋暫定中間結果を全部結合して常に最新状態を保持
+      let text = "";
+      for (let i = 0; i < e.results.length; i++) {
+        text += e.results[i][0].transcript;
+      }
+      transcriptRef.current = text;
     };
 
     recognition.onend = () => setIsRecording(false);
@@ -39,60 +43,224 @@ function useVoiceInput(onResult: (text: string) => void) {
     recognitionRef.current = recognition;
     recognition.start();
     setIsRecording(true);
-  }, [isRecording, onResult]);
+  }, []);
 
-  return { isRecording, toggle };
+  const stop = useCallback(async () => {
+    recognitionRef.current?.stop();
+    setIsRecording(false);
+
+    const raw = transcriptRef.current.trim();
+    if (!raw) return;
+
+    // 短いテキストはそのまま（API呼び出し不要）
+    if (raw.length <= 15) {
+      onResult(raw);
+      return;
+    }
+
+    // Haikuで整形
+    setIsCleaning(true);
+    try {
+      const res = await fetch("/api/voice-clean", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ transcript: raw }),
+      });
+      const data = await res.json();
+      onResult(data.text || raw);
+    } catch {
+      onResult(raw); // 失敗時はそのまま
+    } finally {
+      setIsCleaning(false);
+    }
+  }, [onResult]);
+
+  return { isRecording, isCleaning, start, stop };
 }
 
-// マイクボタンコンポーネント
-function MicButton({ value, setValue }: { value: string; setValue: (v: string) => void }) {
-  const append = useCallback((text: string) => {
-    setValue(value ? value + "\n" + text : text);
-  }, [value, setValue]);
+// thin-stroke マイクSVG
+const MicIcon = ({ color = "currentColor" }: { color?: string }) => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="9" y="1" width="6" height="12" rx="3"/>
+    <path d="M5 10a7 7 0 0 0 14 0"/>
+    <line x1="12" y1="19" x2="12" y2="23"/>
+    <line x1="8" y1="23" x2="16" y2="23"/>
+  </svg>
+);
 
-  const { isRecording, toggle } = useVoiceInput(append);
+// 録音中の波形SVG
+const WaveIcon = ({ color = "currentColor" }: { color?: string }) => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round">
+    <line x1="2" y1="12" x2="2" y2="12"/>
+    <line x1="6" y1="9" x2="6" y2="15"/>
+    <line x1="10" y1="5" x2="10" y2="19"/>
+    <line x1="14" y1="7" x2="14" y2="17"/>
+    <line x1="18" y1="9" x2="18" y2="15"/>
+    <line x1="22" y1="12" x2="22" y2="12"/>
+  </svg>
+);
 
+// マイクボタン本体（プッシュトゥトーク）
+function PushMicButton({
+  isRecording, isCleaning, start, stop,
+}: {
+  isRecording: boolean;
+  isCleaning: boolean;
+  start: () => void;
+  stop: () => void;
+}) {
   return (
     <button
       type="button"
-      onClick={toggle}
-      title={isRecording ? "録音中（クリックで停止）" : "音声入力"}
+      onMouseDown={(e) => { e.preventDefault(); start(); }}
+      onMouseUp={stop}
+      onMouseLeave={() => { if (isRecording) stop(); }}
+      onTouchStart={(e) => { e.preventDefault(); start(); }}
+      onTouchEnd={stop}
+      disabled={isCleaning}
+      title={isRecording ? "離すと確定・整形" : isCleaning ? "AI整形中..." : "押しながら話す"}
       style={{
-        position: "absolute",
-        right: "10px",
-        bottom: "10px",
-        width: "32px",
-        height: "32px",
-        borderRadius: "8px",
+        width: "28px",
+        height: "28px",
+        borderRadius: "7px",
         border: "none",
-        backgroundColor: isRecording ? "#ef4444" : "#e8e7e2",
-        cursor: "pointer",
+        backgroundColor: isRecording
+          ? "rgba(239,68,68,0.12)"
+          : isCleaning
+          ? "rgba(99,102,241,0.1)"
+          : "transparent",
+        cursor: isCleaning ? "wait" : "pointer",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        transition: "all 0.15s",
+        transition: "background-color 0.1s",
+        outline: "none",
         flexShrink: 0,
-        boxShadow: isRecording ? "0 0 0 3px rgba(239,68,68,0.25)" : "none",
+        boxShadow: isRecording
+          ? "0 0 0 2px rgba(239,68,68,0.35)"
+          : isCleaning
+          ? "0 0 0 2px rgba(99,102,241,0.25)"
+          : "none",
+        userSelect: "none",
       }}
     >
-      {isRecording ? (
-        // 録音中：波形アイコン
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
-          <rect x="3" y="8" width="3" height="8" rx="1.5"/>
-          <rect x="8.5" y="4" width="3" height="16" rx="1.5"/>
-          <rect x="14" y="6" width="3" height="12" rx="1.5"/>
-          <rect x="19.5" y="9" width="3" height="6" rx="1.5"/>
+      {isCleaning ? (
+        // 整形中：くるくるアニメ
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round">
+          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
         </svg>
+      ) : isRecording ? (
+        <WaveIcon color="#ef4444" />
       ) : (
-        // 待機中：マイクアイコン
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#555">
-          <path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4z"/>
-          <path d="M19 10a7 7 0 0 1-14 0H3a9 9 0 0 0 8 8.94V21H9v2h6v-2h-2v-2.06A9 9 0 0 0 21 10h-2z"/>
-        </svg>
+        <MicIcon color="#aaa" />
       )}
     </button>
   );
 }
+
+// テキストエリア用：底部ツールバー付きラッパー
+function TextareaWithMic({
+  value, setValue, placeholder, rows,
+}: {
+  value: string;
+  setValue: (v: string) => void;
+  placeholder: string;
+  rows: number;
+}) {
+  const append = useCallback((text: string) => {
+    setValue(value ? value + "\n" + text : text);
+  }, [value, setValue]);
+  const { isRecording, isCleaning, start, stop } = useVoiceInput(append);
+
+  return (
+    <div style={{ border: "1px solid #e5e4df", borderRadius: "10px", overflow: "hidden", backgroundColor: "#fafaf8" }}>
+      <textarea
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder={placeholder}
+        rows={rows}
+        style={{
+          width: "100%",
+          border: "none",
+          outline: "none",
+          resize: "none",
+          padding: "12px 14px",
+          fontSize: "14px",
+          color: "#333",
+          backgroundColor: "transparent",
+          fontFamily: "inherit",
+          lineHeight: 1.6,
+          boxSizing: "border-box",
+        }}
+      />
+      <div style={{
+        borderTop: "1px solid #eeede8",
+        backgroundColor: "#f5f4ef",
+        padding: "5px 8px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        gap: "4px",
+      }}>
+        {isRecording && <span style={{ fontSize: "11px", color: "#ef4444" }}>録音中…</span>}
+        {isCleaning && <span style={{ fontSize: "11px", color: "#6366f1" }}>AI整形中…</span>}
+        <PushMicButton isRecording={isRecording} isCleaning={isCleaning} start={start} stop={stop} />
+      </div>
+    </div>
+  );
+}
+
+// 一行入力用：右端にマイクボタン
+function InputWithMic({
+  value, setValue, placeholder,
+}: {
+  value: string;
+  setValue: (v: string) => void;
+  placeholder: string;
+}) {
+  const append = useCallback((text: string) => {
+    setValue(value ? value + " " + text : text);
+  }, [value, setValue]);
+  const { isRecording, isCleaning, start, stop } = useVoiceInput(append);
+
+  return (
+    <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder={placeholder}
+        style={{
+          width: "100%",
+          border: "1px solid #e5e4df",
+          borderRadius: "10px",
+          padding: "10px 44px 10px 14px",
+          fontSize: "14px",
+          color: "#333",
+          backgroundColor: "#fafaf8",
+          outline: "none",
+          fontFamily: "inherit",
+          boxSizing: "border-box",
+        }}
+      />
+      <div style={{ position: "absolute", right: "8px" }}>
+        <PushMicButton isRecording={isRecording} isCleaning={isCleaning} start={start} stop={stop} />
+      </div>
+    </div>
+  );
+}
+
+// ヘッダーロゴSVG（ノードグラフ風）
+const LogoIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="4" r="2"/>
+    <circle cx="4" cy="20" r="2"/>
+    <circle cx="20" cy="20" r="2"/>
+    <line x1="12" y1="6" x2="5.5" y2="18"/>
+    <line x1="12" y1="6" x2="18.5" y2="18"/>
+    <line x1="6" y1="20" x2="18" y2="20"/>
+  </svg>
+);
 
 type Platform = "crowdworks" | "lancers";
 
@@ -289,7 +457,7 @@ export default function Home() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    border: "1px solid #e8e7e2",
+    border: "1px solid #e5e4df",
     borderRadius: "10px",
     padding: "10px 14px",
     fontSize: "14px",
@@ -298,14 +466,15 @@ export default function Home() {
     outline: "none",
     fontFamily: "inherit",
     transition: "border-color 0.15s",
+    boxSizing: "border-box",
   };
 
   const cardStyle: React.CSSProperties = {
     backgroundColor: "#fff",
     borderRadius: "16px",
-    padding: "28px 32px",
-    marginBottom: "16px",
-    boxShadow: "0 1px 4px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)",
+    padding: "26px 28px",
+    marginBottom: "14px",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.035)",
   };
 
   const stepLabelStyle: React.CSSProperties = {
@@ -334,10 +503,10 @@ export default function Home() {
       <div style={{ backgroundColor: "#fff", borderBottom: "1px solid #e8e7e2", padding: "0 32px" }}>
         <div style={{ maxWidth: "780px", margin: "0 auto", padding: "18px 0", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{ width: "28px", height: "28px", backgroundColor: "#1a1a1a", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ color: "#fff", fontSize: "14px" }}>✦</span>
+            <div style={{ width: "30px", height: "30px", backgroundColor: "#1a1a1a", borderRadius: "9px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <LogoIcon />
             </div>
-            <span style={{ fontSize: "15px", fontWeight: 600, color: "#1a1a1a" }}>募集文ジェネレーター</span>
+            <span style={{ fontSize: "15px", fontWeight: 600, color: "#1a1a1a", letterSpacing: "-0.01em" }}>募集文ジェネレーター</span>
           </div>
           <span style={{ fontSize: "12px", color: "#999" }}>CrowdWorks · Lancers</span>
         </div>
@@ -370,7 +539,7 @@ export default function Home() {
                   flex: 1,
                   padding: "14px 16px",
                   borderRadius: "12px",
-                  border: platform === p ? "2px solid #1a1a1a" : "2px solid #e8e7e2",
+                  border: platform === p ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
                   backgroundColor: platform === p ? "#1a1a1a" : "#fff",
                   color: platform === p ? "#fff" : "#555",
                   fontWeight: 500,
@@ -396,7 +565,7 @@ export default function Home() {
             <select
               value={selectedCategory?.id || ""}
               onChange={(e) => handleCategoryChange(e.target.value)}
-              style={{ ...inputStyle, marginBottom: "12px", appearance: "auto" }}
+              style={{ ...inputStyle, marginBottom: "12px" }}
             >
               <option value="">カテゴリを選択</option>
               {currentCategories.map((cat) => (
@@ -409,7 +578,7 @@ export default function Home() {
                 <select
                   value={selectedSubcategory?.name || ""}
                   onChange={(e) => handleSubcategoryChange(e.target.value)}
-                  style={{ ...inputStyle, appearance: "auto" }}
+                  style={{ ...inputStyle }}
                 >
                   <option value="">サブカテゴリ（任意）</option>
                   {selectedCategory.subcategories.map((sub) => (
@@ -447,7 +616,7 @@ export default function Home() {
                     flex: 1,
                     padding: "14px 16px",
                     borderRadius: "12px",
-                    border: paymentType === pt.value ? "2px solid #1a1a1a" : "2px solid #e8e7e2",
+                    border: paymentType === pt.value ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
                     backgroundColor: paymentType === pt.value ? "#1a1a1a" : "#fff",
                     cursor: "pointer",
                     textAlign: "left",
@@ -483,7 +652,7 @@ export default function Home() {
                     flex: 1,
                     padding: "14px 16px",
                     borderRadius: "12px",
-                    border: enthusiasmLevel === level.value ? "2px solid #1a1a1a" : "2px solid #e8e7e2",
+                    border: enthusiasmLevel === level.value ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
                     backgroundColor: enthusiasmLevel === level.value ? "#1a1a1a" : "#fff",
                     cursor: "pointer",
                     textAlign: "left",
@@ -553,7 +722,7 @@ export default function Home() {
                   style={{
                     padding: "12px 24px",
                     borderRadius: "10px",
-                    border: deadlineDays === opt.days ? "2px solid #1a1a1a" : "2px solid #e8e7e2",
+                    border: deadlineDays === opt.days ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
                     backgroundColor: deadlineDays === opt.days ? "#1a1a1a" : "#fff",
                     color: deadlineDays === opt.days ? "#fff" : "#555",
                     fontWeight: 500,
@@ -582,30 +751,21 @@ export default function Home() {
 
               <div>
                 <label style={labelStyle}>作業内容 <RequiredBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <textarea
-                    value={jobContent}
-                    onChange={(e) => setJobContent(e.target.value)}
-                    placeholder={"例：企業の施設・サービスを紹介するショート動画の編集\n・用途：Instagram Reels / TikTok（縦型9:16、30〜60秒）\n・弊社カメラマンが撮影した素材を支給、編集のみお任せ"}
-                    rows={4}
-                    style={{ ...inputStyle, resize: "none", paddingBottom: "44px" }}
-                  />
-                  <MicButton value={jobContent} setValue={setJobContent} />
-                </div>
+                <TextareaWithMic
+                  value={jobContent}
+                  setValue={setJobContent}
+                  placeholder={"例：企業の施設・サービスを紹介するショート動画の編集\n・用途：Instagram Reels / TikTok（縦型9:16、30〜60秒）\n・弊社カメラマンが撮影した素材を支給、編集のみお任せ"}
+                  rows={4}
+                />
               </div>
 
               <div>
                 <label style={labelStyle}>案件ボリューム・頻度 <OptionalBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <input
-                    type="text"
-                    value={jobVolume}
-                    onChange={(e) => setJobVolume(e.target.value)}
-                    placeholder="例：月4本 / 1本あたり2〜3時間 / 半年〜1年の継続案件が多いです"
-                    style={{ ...inputStyle, paddingRight: "48px" }}
-                  />
-                  <MicButton value={jobVolume} setValue={setJobVolume} />
-                </div>
+                <InputWithMic
+                  value={jobVolume}
+                  setValue={setJobVolume}
+                  placeholder="例：月4本 / 1本あたり2〜3時間 / 半年〜1年の継続案件が多いです"
+                />
               </div>
 
               <div>
@@ -622,7 +782,7 @@ export default function Home() {
                       style={{
                         padding: "9px 20px",
                         borderRadius: "9px",
-                        border: continuity === opt.value ? "2px solid #1a1a1a" : "2px solid #e8e7e2",
+                        border: continuity === opt.value ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
                         backgroundColor: continuity === opt.value ? "#1a1a1a" : "#fff",
                         color: continuity === opt.value ? "#fff" : "#555",
                         fontWeight: 500,
@@ -640,72 +800,51 @@ export default function Home() {
 
               <div>
                 <label style={labelStyle}>必要なスキル・使用ツール <RequiredBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <textarea
-                    value={requiredSkills}
-                    onChange={(e) => setRequiredSkills(e.target.value)}
-                    placeholder={"例：\n・Adobe Premiere Pro等の有料ツール使用経験\n・動画編集歴1年以上（スクール期間除く）\n・ポートフォリオあること"}
-                    rows={4}
-                    style={{ ...inputStyle, resize: "none", paddingBottom: "44px" }}
-                  />
-                  <MicButton value={requiredSkills} setValue={setRequiredSkills} />
-                </div>
+                <TextareaWithMic
+                  value={requiredSkills}
+                  setValue={setRequiredSkills}
+                  placeholder={"例：\n・Adobe Premiere Pro等の有料ツール使用経験\n・動画編集歴1年以上（スクール期間除く）\n・ポートフォリオあること"}
+                  rows={4}
+                />
               </div>
 
               <div>
                 <label style={labelStyle}>重視するポイント <OptionalBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <textarea
-                    value={priorities}
-                    onChange={(e) => setPriorities(e.target.value)}
-                    placeholder={"例：\n・クオリティ重視（企業プロモーション系の実績歓迎）\n・納期厳守（遅れる場合は事前連絡できる方）\n・レスポンスが早い方"}
-                    rows={3}
-                    style={{ ...inputStyle, resize: "none", paddingBottom: "44px" }}
-                  />
-                  <MicButton value={priorities} setValue={setPriorities} />
-                </div>
+                <TextareaWithMic
+                  value={priorities}
+                  setValue={setPriorities}
+                  placeholder={"例：\n・クオリティ重視（企業プロモーション系の実績歓迎）\n・納期厳守（遅れる場合は事前連絡できる方）\n・レスポンスが早い方"}
+                  rows={3}
+                />
               </div>
 
               <div>
                 <label style={labelStyle}>ご遠慮いただきたい方 <OptionalBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <textarea
-                    value={ngConditions}
-                    onChange={(e) => setNgConditions(e.target.value)}
-                    placeholder={"例：\n・YouTube編集・ショート動画編集がメインの方\n・納期に遅れる＆連絡もない方\n・ポートフォリオがない方"}
-                    rows={3}
-                    style={{ ...inputStyle, resize: "none", paddingBottom: "44px" }}
-                  />
-                  <MicButton value={ngConditions} setValue={setNgConditions} />
-                </div>
+                <TextareaWithMic
+                  value={ngConditions}
+                  setValue={setNgConditions}
+                  placeholder={"例：\n・YouTube編集・ショート動画編集がメインの方\n・納期に遅れる＆連絡もない方\n・ポートフォリオがない方"}
+                  rows={3}
+                />
               </div>
 
               <div>
                 <label style={labelStyle}>来社・勤務形態 <OptionalBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <input
-                    type="text"
-                    value={workLocation}
-                    onChange={(e) => setWorkLocation(e.target.value)}
-                    placeholder="例：完全リモート / 東京都中央区（週1〜2回の来社が望ましい）"
-                    style={{ ...inputStyle, paddingRight: "48px" }}
-                  />
-                  <MicButton value={workLocation} setValue={setWorkLocation} />
-                </div>
+                <InputWithMic
+                  value={workLocation}
+                  setValue={setWorkLocation}
+                  placeholder="例：完全リモート / 東京都中央区（週1〜2回の来社が望ましい）"
+                />
               </div>
 
               <div>
                 <label style={labelStyle}>応募時に記載してほしいこと <OptionalBadge /></label>
-                <div style={{ position: "relative" }}>
-                  <textarea
-                    value={applicationItems}
-                    onChange={(e) => setApplicationItems(e.target.value)}
-                    placeholder={"例：\n・簡単な自己紹介\n・業務経験・実績\n・ポートフォリオURL\n・使用ツール\n・希望単価\n・稼働可能時間"}
-                    rows={4}
-                    style={{ ...inputStyle, resize: "none", paddingBottom: "44px" }}
-                  />
-                  <MicButton value={applicationItems} setValue={setApplicationItems} />
-                </div>
+                <TextareaWithMic
+                  value={applicationItems}
+                  setValue={setApplicationItems}
+                  placeholder={"例：\n・簡単な自己紹介\n・業務経験・実績\n・ポートフォリオURL\n・使用ツール\n・希望単価\n・稼働可能時間"}
+                  rows={4}
+                />
               </div>
 
             </div>
