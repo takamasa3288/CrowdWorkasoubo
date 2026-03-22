@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 
 const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY ?? "",
 });
 
 // サンプル募集文を読み込む
