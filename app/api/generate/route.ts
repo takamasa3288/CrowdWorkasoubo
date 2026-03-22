@@ -8,13 +8,21 @@ const client = new Anthropic({
 });
 
 // サンプル募集文を読み込む
-function loadSamples(enthusiasmLevel: number): string {
+function loadSamples(enthusiasmLevel: number, hasOfficeVisit: boolean): string {
   const samplesDir = path.join(process.cwd(), "data/samples");
-  const sampleFiles: Record<number, string[]> = {
-    1: ["level1-data-collection.txt"],
-    2: ["level2-video-editing-partner.txt", "level2-reel-editing.txt"],
-    3: ["level3-project-leader.txt", "level3-instagram-director.txt"],
-  };
+
+  // 来社ありの場合は来社情報が含まれるlevel3サンプルを優先
+  const sampleFiles: Record<number, string[]> = hasOfficeVisit
+    ? {
+        1: ["level3-instagram-director.txt"],
+        2: ["level3-instagram-director.txt", "level3-project-leader.txt"],
+        3: ["level3-project-leader.txt", "level3-instagram-director.txt"],
+      }
+    : {
+        1: ["level1-data-collection.txt"],
+        2: ["level2-video-editing-partner.txt", "level2-reel-editing.txt"],
+        3: ["level3-project-leader.txt", "level3-instagram-director.txt"],
+      };
 
   const files = sampleFiles[enthusiasmLevel] ?? sampleFiles[2];
   const samples: string[] = [];
@@ -63,7 +71,8 @@ export async function POST(req: NextRequest) {
     };
 
     const tone = toneMap[enthusiasmLevel] ?? toneMap[2];
-    const samples = loadSamples(enthusiasmLevel);
+    const hasOfficeVisit = typeof jobDetails === "string" && jobDetails.includes("【来社】あり");
+    const samples = loadSamples(enthusiasmLevel, hasOfficeVisit);
     const paymentTypeLabel = paymentType === "hourly" ? "時間単価制" : "固定報酬制";
 
     const systemPrompt = `あなたはクラウドソーシングの募集文章の専門家です。

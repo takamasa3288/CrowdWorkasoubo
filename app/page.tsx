@@ -333,7 +333,8 @@ export default function Home() {
   const [continuity, setContinuity] = useState<"single" | "ongoing" | "undecided" | null>(null);
   const [priorities, setPriorities] = useState<string>("");
   const [ngConditions, setNgConditions] = useState<string>("");
-  const [workLocation, setWorkLocation] = useState<string>("");
+  const [officeVisit, setOfficeVisit] = useState<"yes" | "no" | null>(null);
+  const [officeVisitNote, setOfficeVisitNote] = useState<string>("");
   const [applicationItems, setApplicationItems] = useState<string>("");
   const [budget, setBudget] = useState<string>("");
   const [budgetUnit, setBudgetUnit] = useState<string>("円");
@@ -389,7 +390,11 @@ export default function Home() {
       `【必要なスキル・使用ツール】\n${requiredSkills.trim()}`,
       priorities.trim() ? `【重視するポイント】\n${priorities.trim()}` : "",
       ngConditions.trim() ? `【ご遠慮いただきたい方】\n${ngConditions.trim()}` : "",
-      workLocation.trim() ? `【来社・勤務形態】\n${workLocation.trim()}` : "",
+      officeVisit === "yes"
+        ? `【来社】必須ではないが来れる方は大歓迎！ぜひ一緒に働きたい${officeVisitNote.trim() ? `\nオフィス所在地：${officeVisitNote.trim()}` : ""}\n※「可能であれば〜来れる方大歓迎！！」のように、強く歓迎する表現で自然に文中に盛り込むこと。条件・必須とは書かないこと`
+        : officeVisit === "no"
+        ? "【来社】なし（完全リモート）"
+        : "",
       applicationItems.trim() ? `【応募時に記載してほしいこと】\n${applicationItems.trim()}` : "",
     ].filter(Boolean).join("\n\n");
 
@@ -445,7 +450,8 @@ export default function Home() {
     setContinuity(null);
     setPriorities("");
     setNgConditions("");
-    setWorkLocation("");
+    setOfficeVisit(null);
+    setOfficeVisitNote("");
     setApplicationItems("");
     setBudget("");
     setBudgetUnit("円");
@@ -829,12 +835,35 @@ export default function Home() {
               </div>
 
               <div>
-                <label style={labelStyle}>来社・勤務形態 <OptionalBadge /></label>
-                <InputWithMic
-                  value={workLocation}
-                  setValue={setWorkLocation}
-                  placeholder="例：完全リモート / 東京都中央区（週1〜2回の来社が望ましい）"
-                />
+                <label style={labelStyle}>来社 <OptionalBadge /></label>
+                <div style={{ display: "flex", gap: "8px", marginBottom: officeVisit === "yes" ? "10px" : "0" }}>
+                  {(["yes", "no"] as const).map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setOfficeVisit(officeVisit === v ? null : v)}
+                      style={{
+                        padding: "8px 20px",
+                        borderRadius: "8px",
+                        border: officeVisit === v ? "2px solid #333" : "2px solid #e5e4df",
+                        backgroundColor: officeVisit === v ? "#333" : "#fafaf8",
+                        color: officeVisit === v ? "#fff" : "#555",
+                        fontWeight: 600,
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {v === "yes" ? "あり" : "なし"}
+                    </button>
+                  ))}
+                </div>
+                {officeVisit === "yes" && (
+                  <InputWithMic
+                    value={officeVisitNote}
+                    setValue={setOfficeVisitNote}
+                    placeholder="例：東京都中央区日本橋付近（週1〜2回）"
+                  />
+                )}
               </div>
 
               <div>
