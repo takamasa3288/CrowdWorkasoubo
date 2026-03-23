@@ -262,8 +262,6 @@ const LogoIcon = () => (
   </svg>
 );
 
-type Platform = "crowdworks" | "lancers";
-
 interface PriceRange {
   min: number;
   max: number;
@@ -289,18 +287,6 @@ const ENTHUSIASM_LEVELS = [
   { value: 3, label: "仲間・パートナー募集", description: "熱量高め・長期関係志向" },
 ];
 
-const DEADLINE_OPTIONS: Record<string, { label: string; days: number }[]> = {
-  crowdworks: [
-    { label: "3日", days: 3 },
-    { label: "7日", days: 7 },
-    { label: "14日（最長）", days: 14 },
-  ],
-  lancers: [
-    { label: "3日", days: 3 },
-    { label: "5日", days: 5 },
-    { label: "7日（最長）", days: 7 },
-  ],
-};
 
 const PAYMENT_TYPES = [
   { value: "fixed", label: "固定報酬制", description: "成果物に対して報酬を支払う" },
@@ -322,7 +308,6 @@ const OptionalBadge = () => (
 );
 
 export default function Home() {
-  const [platform, setPlatform] = useState<Platform | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<Subcategory | null>(null);
   const [paymentType, setPaymentType] = useState<PaymentType | null>(null);
@@ -338,28 +323,19 @@ export default function Home() {
   const [applicationItems, setApplicationItems] = useState<string>("");
   const [budget, setBudget] = useState<string>("");
   const [budgetUnit, setBudgetUnit] = useState<string>("円");
-  const [deadlineDays, setDeadlineDays] = useState<number | null>(null);
   const [generatedText, setGeneratedText] = useState<string>("");
+  const [generatedTitle, setGeneratedTitle] = useState<string>("");
+  const [titleCandidates, setTitleCandidates] = useState<string[]>([]);
+  const [isTitleLoading, setIsTitleLoading] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [errors, setErrors] = useState<string[]>([]);
   const [tokenUsage, setTokenUsage] = useState<{ inputTokens: number; outputTokens: number } | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
 
-  const currentCategories: Category[] =
-    platform ? (categories[platform] as Category[]) : [];
+  const currentCategories: Category[] = categories["crowdworks"] as Category[];
 
   const currentPriceRange: PriceRange | null =
     selectedSubcategory?.priceRange ?? selectedCategory?.priceRange ?? null;
-
-  const handlePlatformChange = (p: Platform) => {
-    setPlatform(p);
-    setSelectedCategory(null);
-    setSelectedSubcategory(null);
-    setBudget("");
-    setDeadlineDays(null);
-    setGeneratedText("");
-    setError("");
-  };
 
   const handleCategoryChange = (catId: string) => {
     const cat = currentCategories.find((c) => c.id === catId) || null;
@@ -377,11 +353,17 @@ export default function Home() {
     if (sub?.priceRange) setBudgetUnit(sub.priceRange.unit);
   };
 
-  const handleGenerate = async () => {
-    if (!platform || !selectedCategory || !paymentType || !deadlineDays || !jobContent.trim() || !requiredSkills.trim()) {
-      setError("プラットフォーム・カテゴリ・支払い方式・募集期日・作業内容・必要スキルをすべて入力してください");
+  const handleGenerate = async (skipTitleRegen = false) => {
+    const errs: string[] = [];
+    if (!selectedCategory) errs.push("STEP 1：カテゴリを選択してください");
+    if (!paymentType) errs.push("STEP 2：支払い方式を選択してください");
+    if (!jobContent.trim()) errs.push("STEP 5：作業内容を入力してください");
+    if (!requiredSkills.trim()) errs.push("STEP 5：必要なスキルを入力してください");
+    if (errs.length > 0) {
+      setErrors(errs);
       return;
     }
+    setErrors([]);
 
     const jobDetails = [
       `【作業内容】\n${jobContent.trim()}`,
@@ -398,7 +380,6 @@ export default function Home() {
       applicationItems.trim() ? `【応募時に記載してほしいこと】\n${applicationItems.trim()}` : "",
     ].filter(Boolean).join("\n\n");
 
-    setError("");
     setIsLoading(true);
     setGeneratedText("");
     setTokenUsage(null);
@@ -408,15 +389,13 @@ export default function Home() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          platform,
-          category: selectedCategory.name,
+          category: selectedCategory!.name,
           subcategory: selectedSubcategory?.name || "",
           paymentType,
           enthusiasmLevel,
           jobDetails,
           budget: budget ? `${budget}${budgetUnit}` : "",
           priceRangeNote: currentPriceRange?.note || "",
-          deadlineDays: deadlineDays ?? null,
         }),
       });
 
@@ -425,10 +404,43 @@ export default function Home() {
 
       setGeneratedText(data.text);
       setTokenUsage(data.usage);
+
+      // 初回のみタイトルも自動生成
+      if (!skipTitleRegen) {
+        setGeneratedTitle("");
+        setTitleCandidates([]);
+        generateTitles(jobDetails);
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "エラーが発生しました");
+      setErrors([err instanceof Error ? err.message : "エラーが発生しました"]);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const generateTitles = async (jobDetails: string) => {
+    setIsTitleLoading(true);
+    setTitleCandidates([]);
+    try {
+      const res = await fetch("/api/generate-title", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: selectedCategory!.name,
+          jobDetails,
+          paymentType,
+          budget: budget ? `${budget}${budgetUnit}` : "",
+        }),
+      });
+      const data = await res.json();
+      if (data.titles?.length > 0) {
+        setTitleCandidates(data.titles);
+        setGeneratedTitle(data.titles[0]);
+      }
+    } catch {
+      // タイトル生成失敗は無視
+    } finally {
+      setIsTitleLoading(false);
     }
   };
 
@@ -439,7 +451,6 @@ export default function Home() {
   };
 
   const handleReset = () => {
-    setPlatform(null);
     setSelectedCategory(null);
     setSelectedSubcategory(null);
     setPaymentType(null);
@@ -455,9 +466,10 @@ export default function Home() {
     setApplicationItems("");
     setBudget("");
     setBudgetUnit("円");
-    setDeadlineDays(null);
     setGeneratedText("");
-    setError("");
+    setGeneratedTitle("");
+    setTitleCandidates([]);
+    setErrors([]);
     setTokenUsage(null);
   };
 
@@ -514,7 +526,7 @@ export default function Home() {
             </div>
             <span style={{ fontSize: "15px", fontWeight: 600, color: "#1a1a1a", letterSpacing: "-0.01em" }}>募集文ジェネレーター</span>
           </div>
-          <span style={{ fontSize: "12px", color: "#999" }}>CrowdWorks · Lancers</span>
+          <span style={{ fontSize: "12px", color: "#999" }}>クラウドワークス・ランサーズ対応</span>
         </div>
       </div>
 
@@ -530,44 +542,12 @@ export default function Home() {
           </p>
         </div>
 
-        {/* STEP 1: プラットフォーム */}
+        {/* STEP 1: カテゴリ */}
         <div style={cardStyle}>
           <div style={stepLabelStyle}>
             <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>1</span>
-            プラットフォーム
+            カテゴリ
           </div>
-          <div style={{ display: "flex", gap: "10px" }}>
-            {(["crowdworks", "lancers"] as Platform[]).map((p) => (
-              <button
-                key={p}
-                onClick={() => handlePlatformChange(p)}
-                style={{
-                  flex: 1,
-                  padding: "14px 16px",
-                  borderRadius: "12px",
-                  border: platform === p ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
-                  backgroundColor: platform === p ? "#1a1a1a" : "#fff",
-                  color: platform === p ? "#fff" : "#555",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                  fontFamily: "inherit",
-                }}
-              >
-                {p === "crowdworks" ? "クラウドワークス" : "ランサーズ"}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* STEP 2: カテゴリ */}
-        {platform && (
-          <div style={cardStyle}>
-            <div style={stepLabelStyle}>
-              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>2</span>
-              カテゴリ
-            </div>
             <select
               value={selectedCategory?.id || ""}
               onChange={(e) => handleCategoryChange(e.target.value)}
@@ -604,13 +584,12 @@ export default function Home() {
               </>
             )}
           </div>
-        )}
 
-        {/* STEP 3: 支払い方式 */}
+        {/* STEP 2: 支払い方式 */}
         {selectedCategory && (
           <div style={cardStyle}>
             <div style={stepLabelStyle}>
-              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>3</span>
+              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>2</span>
               支払い方式
             </div>
             <div style={{ display: "flex", gap: "10px" }}>
@@ -642,11 +621,11 @@ export default function Home() {
           </div>
         )}
 
-        {/* STEP 4: 募集トーン */}
+        {/* STEP 3: 募集トーン */}
         {selectedCategory && (
           <div style={cardStyle}>
             <div style={stepLabelStyle}>
-              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>4</span>
+              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>3</span>
               募集トーン
             </div>
             <div style={{ display: "flex", gap: "10px" }}>
@@ -678,11 +657,11 @@ export default function Home() {
           </div>
         )}
 
-        {/* STEP 5: 募集金額 */}
+        {/* STEP 4: 募集金額 */}
         {selectedCategory && (
           <div style={cardStyle}>
             <div style={stepLabelStyle}>
-              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>5</span>
+              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>4</span>
               募集金額
               <span style={{ marginLeft: "auto", fontSize: "11px", color: "#bbb", fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>未入力の場合は金額なしで生成</span>
             </div>
@@ -710,46 +689,11 @@ export default function Home() {
           </div>
         )}
 
-        {/* STEP 6: 募集期日 */}
-        {selectedCategory && platform && (
-          <div style={cardStyle}>
-            <div style={stepLabelStyle}>
-              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>6</span>
-              募集期日
-              <span style={{ marginLeft: "4px", fontSize: "11px", color: "#bbb", fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>
-                {platform === "crowdworks" ? "（最長14日）" : "（最長7日）"}
-              </span>
-            </div>
-            <div style={{ display: "flex", gap: "10px" }}>
-              {DEADLINE_OPTIONS[platform].map((opt) => (
-                <button
-                  key={opt.days}
-                  onClick={() => setDeadlineDays(deadlineDays === opt.days ? null : opt.days)}
-                  style={{
-                    padding: "12px 24px",
-                    borderRadius: "10px",
-                    border: deadlineDays === opt.days ? "1.5px solid #1a1a1a" : "1.5px solid #e5e4df",
-                    backgroundColor: deadlineDays === opt.days ? "#1a1a1a" : "#fff",
-                    color: deadlineDays === opt.days ? "#fff" : "#555",
-                    fontWeight: 500,
-                    fontSize: "14px",
-                    cursor: "pointer",
-                    transition: "all 0.15s",
-                    fontFamily: "inherit",
-                  }}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* STEP 7: 業務詳細 */}
+        {/* STEP 5: 業務詳細 */}
         {selectedCategory && (
           <div style={cardStyle}>
             <div style={stepLabelStyle}>
-              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>7</span>
+              <span style={{ backgroundColor: "#1a1a1a", color: "#fff", width: "20px", height: "20px", borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "10px", fontWeight: 700, flexShrink: 0 }}>5</span>
               業務詳細
             </div>
 
@@ -881,9 +825,13 @@ export default function Home() {
         )}
 
         {/* エラー */}
-        {error && (
-          <div style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "12px", padding: "14px 18px", marginBottom: "16px", fontSize: "13px", color: "#dc2626" }}>
-            {error}
+        {errors.length > 0 && (
+          <div style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "12px", padding: "14px 18px", marginBottom: "16px" }}>
+            {errors.map((e, i) => (
+              <div key={i} style={{ fontSize: "13px", color: "#dc2626", fontWeight: 500, marginBottom: i < errors.length - 1 ? "6px" : 0 }}>
+                ▶ {e}
+              </div>
+            ))}
           </div>
         )}
 
@@ -891,7 +839,7 @@ export default function Home() {
         {selectedCategory && (
           <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
             <button
-              onClick={handleGenerate}
+              onClick={() => handleGenerate(false)}
               disabled={isLoading}
               style={{
                 flex: 1,
@@ -930,17 +878,121 @@ export default function Home() {
           </div>
         )}
 
-        {/* 生成結果 */}
+        {/* タイトル生成結果 */}
+        {(generatedText || isTitleLoading) && (
+          <div style={{ ...cardStyle, marginBottom: "14px", border: "1.5px solid #1a1a1a" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
+              <h2 style={{ fontSize: "13px", fontWeight: 700, color: "#1a1a1a", margin: 0, letterSpacing: "0.02em" }}>募集タイトル</h2>
+              <button
+                onClick={() => {
+                  const jobDetails = [
+                    `【作業内容】\n${jobContent.trim()}`,
+                    jobVolume.trim() ? `【案件ボリューム・頻度】\n${jobVolume.trim()}` : "",
+                    `【必要なスキル・使用ツール】\n${requiredSkills.trim()}`,
+                  ].filter(Boolean).join("\n\n");
+                  generateTitles(jobDetails);
+                }}
+                disabled={isTitleLoading}
+                style={{
+                  fontSize: "12px",
+                  backgroundColor: "#f5f4ef",
+                  color: isTitleLoading ? "#bbb" : "#555",
+                  border: "1px solid #e8e7e2",
+                  padding: "6px 14px",
+                  borderRadius: "8px",
+                  cursor: isTitleLoading ? "not-allowed" : "pointer",
+                  fontFamily: "inherit",
+                  fontWeight: 500,
+                }}
+              >
+                {isTitleLoading ? "生成中..." : "タイトルを再生成"}
+              </button>
+            </div>
+
+            {isTitleLoading && (
+              <div style={{ fontSize: "13px", color: "#999", padding: "8px 0" }}>タイトル候補を生成しています...</div>
+            )}
+
+            {generatedTitle && (
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "11px", color: "#999", marginBottom: "6px" }}>選択中（直接編集できます）</div>
+                <input
+                  type="text"
+                  value={generatedTitle}
+                  onChange={(e) => setGeneratedTitle(e.target.value)}
+                  style={{
+                    width: "100%",
+                    border: "2px solid #1a1a1a",
+                    borderRadius: "10px",
+                    padding: "12px 14px",
+                    fontSize: "15px",
+                    fontWeight: 600,
+                    color: "#1a1a1a",
+                    backgroundColor: "#fff",
+                    outline: "none",
+                    fontFamily: "inherit",
+                    boxSizing: "border-box",
+                  }}
+                />
+              </div>
+            )}
+            {titleCandidates.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <div style={{ fontSize: "11px", color: "#999", marginBottom: "2px" }}>候補から選ぶ</div>
+                {titleCandidates.map((t, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setGeneratedTitle(t)}
+                    style={{
+                      textAlign: "left",
+                      padding: "10px 14px",
+                      borderRadius: "9px",
+                      border: generatedTitle === t ? "2px solid #1a1a1a" : "1.5px solid #e5e4df",
+                      backgroundColor: generatedTitle === t ? "#f5f4ef" : "#fafaf8",
+                      fontSize: "13px",
+                      fontWeight: generatedTitle === t ? 600 : 400,
+                      color: "#1a1a1a",
+                      cursor: "pointer",
+                      fontFamily: "inherit",
+                      transition: "all 0.12s",
+                    }}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* 生成結果（本文） */}
         {generatedText && (
           <div style={{ ...cardStyle, marginBottom: 0 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-              <h2 style={{ fontSize: "13px", fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.08em", margin: 0 }}>生成結果</h2>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+              <h2 style={{ fontSize: "13px", fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.08em", margin: 0 }}>募集本文</h2>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 {tokenUsage && (
                   <span style={{ fontSize: "11px", color: "#bbb" }}>
                     {tokenUsage.inputTokens + tokenUsage.outputTokens} tokens
                   </span>
                 )}
+                <button
+                  onClick={() => handleGenerate(true)}
+                  disabled={isLoading}
+                  style={{
+                    fontSize: "12px",
+                    backgroundColor: "#f5f4ef",
+                    color: isLoading ? "#bbb" : "#555",
+                    border: "1px solid #e8e7e2",
+                    padding: "6px 14px",
+                    borderRadius: "8px",
+                    cursor: isLoading ? "not-allowed" : "pointer",
+                    fontFamily: "inherit",
+                    fontWeight: 500,
+                  }}
+                >
+                  {isLoading ? "生成中..." : "本文を再生成"}
+                </button>
                 <button
                   onClick={handleCopy}
                   style={{
@@ -960,9 +1012,25 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <pre style={{ fontSize: "13px", color: "#333", whiteSpace: "pre-wrap", lineHeight: 1.8, margin: 0, fontFamily: "inherit" }}>
-              {generatedText}
-            </pre>
+            <textarea
+              value={generatedText}
+              onChange={(e) => setGeneratedText(e.target.value)}
+              style={{
+                width: "100%",
+                minHeight: "400px",
+                fontSize: "13px",
+                color: "#333",
+                lineHeight: 1.8,
+                fontFamily: "inherit",
+                border: "1px solid #e5e4df",
+                borderRadius: "10px",
+                padding: "14px",
+                resize: "vertical",
+                outline: "none",
+                backgroundColor: "#fafaf8",
+                boxSizing: "border-box",
+              }}
+            />
           </div>
         )}
 

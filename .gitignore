@@ -45,3 +45,9 @@ next-env.d.ts
 
 # playwright mcp screenshots
 /.playwright-mcp/
+
+# debug screenshots & session files
+/data/*.png
+/data/cw-cookies.json
+/data/la-form-fields.json
+/data/cw-form-fields.json

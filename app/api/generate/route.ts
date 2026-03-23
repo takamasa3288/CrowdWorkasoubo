@@ -42,14 +42,14 @@ function loadSamples(enthusiasmLevel: number, hasOfficeVisit: boolean): string {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { platform, category, subcategory, paymentType, enthusiasmLevel, jobDetails, budget, priceRangeNote, deadlineDays } =
+    const { category, subcategory, paymentType, enthusiasmLevel, jobDetails, budget, priceRangeNote } =
       body;
 
-    if (!platform || !category || !jobDetails) {
+    if (!category || !jobDetails) {
       return NextResponse.json({ error: "必須項目が不足しています" }, { status: 400 });
     }
 
-    const platformName = platform === "crowdworks" ? "クラウドワークス" : "ランサーズ";
+    const platformName = "クラウドワークス・ランサーズ";
 
     // 熱量レベルに応じたトーン指示
     const toneMap: Record<number, { label: string; instruction: string }> = {
@@ -102,7 +102,7 @@ ${samples}
 
 プラットフォーム: ${platformName}
 カテゴリ: ${category}${subcategory ? `\nサブカテゴリ: ${subcategory}` : ""}
-支払い方式: ${paymentTypeLabel}${budget ? `\n募集金額: ${budget}` : ""}${deadlineDays ? `\n募集期間: ${deadlineDays}日間` : ""}${priceRangeNote ? `\n（公式相場参考: ${priceRangeNote}）` : ""}
+支払い方式: ${paymentTypeLabel}${budget ? `\n募集金額: ${budget}` : ""}${priceRangeNote ? `\n（公式相場参考: ${priceRangeNote}）` : ""}
 
 業務詳細:
 ${jobDetails}`;

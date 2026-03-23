@@ -1,228 +1,493 @@
 {
   "crowdworks": [
     {
-      "id": "cw_web_design",
-      "name": "Webデザイン",
-      "priceRange": { "min": 50000, "max": 300000, "unit": "円/ページ", "note": "LP制作：100,000円〜、Webデザイン：50,000円〜" },
+      "id": "cw_ai",
+      "name": "AI・業務効率化",
       "subcategories": [
-        { "name": "Webサイトデザイン", "priceRange": { "min": 50000, "max": 300000, "unit": "円/ページ" } },
-        { "name": "LP（ランディングページ）デザイン", "priceRange": { "min": 100000, "max": 500000, "unit": "円/ページ" } },
-        { "name": "バナー・サムネイルデザイン", "priceRange": { "min": 5000, "max": 50000, "unit": "円" } },
-        { "name": "UI/UXデザイン", "priceRange": { "min": 50000, "max": 300000, "unit": "円" } },
-        { "name": "ワイヤーフレーム作成", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } }
+        { "name": "AI営業・マーケティング支援" },
+        { "name": "AIバックオフィス支援" },
+        { "name": "AIシステム開発・導入・自動化支援" },
+        { "name": "AIメディア・コンテンツ構築支援" },
+        { "name": "その他業務AI化支援" },
+        { "name": "機械学習・ディープラーニング" },
+        { "name": "ChatGPT開発" },
+        { "name": "AI・チャットボット開発" },
+        { "name": "AIアノテーション" }
       ]
     },
     {
-      "id": "cw_system_dev",
+      "id": "cw_system",
       "name": "システム開発・プログラミング",
-      "priceRange": { "min": 100000, "max": 1000000, "unit": "円", "note": "Webシステム：100,000円〜、WordPress：100,000円〜" },
       "subcategories": [
-        { "name": "Webシステム開発", "priceRange": { "min": 100000, "max": 1000000, "unit": "円" } },
-        { "name": "WordPressカスタマイズ", "priceRange": { "min": 100000, "max": 500000, "unit": "円" } },
-        { "name": "ECサイト構築・修正", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } },
-        { "name": "業務システム開発", "priceRange": { "min": 100000, "max": 1000000, "unit": "円" } },
-        { "name": "API連携・開発", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } }
+        { "name": "Web開発・システム設計" },
+        { "name": "保守・運用・更新" },
+        { "name": "アプリケーション開発" },
+        { "name": "iPhone・iPadアプリ開発" },
+        { "name": "Androidアプリ開発" },
+        { "name": "スマートフォン アプリ開発・サイト構築" },
+        { "name": "携帯アプリ・モバイルアプリ開発" },
+        { "name": "ソーシャルゲーム開発" },
+        { "name": "Androidゲーム開発" },
+        { "name": "iPhone・iPadゲーム開発" },
+        { "name": "回路設計・組み込みソフト開発" },
+        { "name": "ハードウェア機構設計・機械設計" },
+        { "name": "CAE（解析・シミュレーション）" }
       ]
     },
     {
-      "id": "cw_app_dev",
-      "name": "スマホアプリ開発",
-      "priceRange": { "min": 300000, "max": 2000000, "unit": "円", "note": "iPhone・Androidアプリ：300,000円〜" },
+      "id": "cw_web",
+      "name": "Web制作・Webデザイン",
       "subcategories": [
-        { "name": "iOSアプリ開発", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
-        { "name": "Androidアプリ開発", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
-        { "name": "クロスプラットフォーム開発", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } }
+        { "name": "ホームページ作成" },
+        { "name": "Webデザイン" },
+        { "name": "WordPress制作・導入" },
+        { "name": "LP（ランディングページ）制作・デザイン" },
+        { "name": "HTML・CSSコーディング" },
+        { "name": "Webサイト修正・更新・機能追加" },
+        { "name": "アイコン・ボタン・ヘッダー制作" },
+        { "name": "CMS導入" },
+        { "name": "モバイルサイト・スマートフォンサイト制作" },
+        { "name": "UI/UX設計・デザイン" },
+        { "name": "インタラクションデザイン" },
+        { "name": "オウンドメディア制作" }
       ]
     },
     {
-      "id": "cw_video",
-      "name": "動画・映像編集",
-      "priceRange": { "min": 3000, "max": 120000, "unit": "円/本", "note": "YouTube：8,000円〜/本、TikTok・ショート：3,000円〜/本、映像制作：120,000円〜/本" },
+      "id": "cw_ec",
+      "name": "ECサイト",
       "subcategories": [
-        { "name": "YouTube動画編集", "priceRange": { "min": 8000, "max": 50000, "unit": "円/本" } },
-        { "name": "TikTok・ショート動画編集", "priceRange": { "min": 3000, "max": 15000, "unit": "円/本" } },
-        { "name": "映像編集・制作", "priceRange": { "min": 120000, "max": 1000000, "unit": "円/本" } },
-        { "name": "アニメーション・モーショングラフィックス", "priceRange": { "min": 150000, "max": 1000000, "unit": "円" } },
-        { "name": "字幕・テロップ作成", "priceRange": { "min": 3000, "max": 20000, "unit": "円/本" } }
+        { "name": "ECサイト制作" },
+        { "name": "ECサイトデザイン" },
+        { "name": "ECサイト運用ツール開発" },
+        { "name": "商品紹介文作成" },
+        { "name": "ECコンサルティング" }
       ]
     },
     {
       "id": "cw_design",
-      "name": "グラフィックデザイン",
-      "priceRange": { "min": 5000, "max": 100000, "unit": "円", "note": "ロゴ：30,000円〜、バナー：5,000円〜、イラスト：30,000円〜" },
+      "name": "デザイン・イラスト",
       "subcategories": [
-        { "name": "ロゴ・名刺デザイン", "priceRange": { "min": 20000, "max": 100000, "unit": "円" } },
-        { "name": "チラシ・パンフレットデザイン", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } },
-        { "name": "SNS投稿デザイン", "priceRange": { "min": 5000, "max": 30000, "unit": "円" } },
-        { "name": "パッケージデザイン", "priceRange": { "min": 35000, "max": 200000, "unit": "円" } },
-        { "name": "イラスト作成", "priceRange": { "min": 30000, "max": 150000, "unit": "円" } }
+        { "name": "ロゴ・バナー・イラスト" },
+        { "name": "印刷物・DTPデザイン" },
+        { "name": "キャラクター・アイコン・アニメ" },
+        { "name": "地図・看板・インフォグラフィック" },
+        { "name": "POP・メニュー・シール" },
+        { "name": "CD・本" },
+        { "name": "プロダクトデザイン" },
+        { "name": "その他（デザイン）" }
+      ]
+    },
+    {
+      "id": "cw_3d",
+      "name": "3D・CG",
+      "subcategories": [
+        { "name": "3D-CAD制作・モデリング" },
+        { "name": "建築設計・CAD・パース作成" },
+        { "name": "VTuber・3Dアニメーション作成" },
+        { "name": "3Dプリンター用データ作成" },
+        { "name": "アバター制作" }
+      ]
+    },
+    {
+      "id": "cw_video",
+      "name": "動画・映像制作",
+      "subcategories": [
+        { "name": "動画作成・動画制作" },
+        { "name": "YouTube動画作成・編集" },
+        { "name": "映像編集・映像制作" },
+        { "name": "映像撮影" },
+        { "name": "TikTok・ショート動画" },
+        { "name": "広告動画" },
+        { "name": "CM・PV・ドラマ制作" },
+        { "name": "企業紹介・講習・PR動画制作" },
+        { "name": "結婚式・イベント動画" },
+        { "name": "ミュージックビデオ（MV）・歌ってみた動画" },
+        { "name": "モーショングラフィックス" },
+        { "name": "キャラクターアニメーション" },
+        { "name": "キャラクター・アニメーション制作" },
+        { "name": "AR/VRコンテンツ制作・撮影" },
+        { "name": "動画シナリオ・台本・構成作成" }
+      ]
+    },
+    {
+      "id": "cw_music",
+      "name": "音声・音楽",
+      "subcategories": [
+        { "name": "声優・ナレーション制作" },
+        { "name": "作曲・音源・効果音" },
+        { "name": "BGM制作" },
+        { "name": "音声制作" },
+        { "name": "楽譜作成" },
+        { "name": "歌唱・仮歌" },
+        { "name": "楽器演奏" },
+        { "name": "ボカロ制作" }
+      ]
+    },
+    {
+      "id": "cw_photo",
+      "name": "写真・撮影・画像",
+      "subcategories": [
+        { "name": "写真撮影" },
+        { "name": "写真加工・写真編集" },
+        { "name": "画像加工・画像編集" },
+        { "name": "Flash制作" }
       ]
     },
     {
       "id": "cw_writing",
       "name": "ライティング・記事作成",
-      "priceRange": { "min": 1, "max": 10, "unit": "円/文字", "note": "記事：1円〜/文字、リライト：3,000円〜/記事、キャッチコピー：10,000円〜" },
       "subcategories": [
-        { "name": "Webライティング・SEO記事", "priceRange": { "min": 1, "max": 5, "unit": "円/文字" } },
-        { "name": "コピーライティング", "priceRange": { "min": 10000, "max": 100000, "unit": "円" } },
-        { "name": "SNS投稿文作成", "priceRange": { "min": 1000, "max": 10000, "unit": "円/本" } },
-        { "name": "商品説明文・LP文章", "priceRange": { "min": 10000, "max": 100000, "unit": "円" } },
-        { "name": "プレスリリース・メルマガ", "priceRange": { "min": 1, "max": 5, "unit": "円/文字" } }
+        { "name": "オウンドメディア・ブログ記事作成" },
+        { "name": "記事・Webコンテンツ作成" },
+        { "name": "SEOライティング" },
+        { "name": "コピーライティング・キャッチフレーズ" },
+        { "name": "セールスコピー・セールスレター" },
+        { "name": "編集・校正・リライト" },
+        { "name": "シナリオ作成・脚本制作・小説作成" },
+        { "name": "インタビュー・取材記事作成" },
+        { "name": "書籍編集・雑誌編集" },
+        { "name": "メルマガ・DM作成" },
+        { "name": "文書作成" },
+        { "name": "求人原稿作成" },
+        { "name": "英文ライティング" },
+        { "name": "その他（ライティング）" }
       ]
     },
     {
-      "id": "cw_marketing",
-      "name": "マーケティング・SNS",
-      "priceRange": { "min": 1200, "max": 5000, "unit": "円/時間", "note": "SNS運用：1,200円〜/時間、Webディレクション：2,000円〜/時間" },
+      "id": "cw_naming",
+      "name": "アイデア・ネーミング",
       "subcategories": [
-        { "name": "SNS運用・Instagram", "priceRange": { "min": 1200, "max": 3000, "unit": "円/時間" } },
-        { "name": "広告運用（Google/Meta）", "priceRange": { "min": 2000, "max": 5000, "unit": "円/時間" } },
-        { "name": "SEO対策", "priceRange": { "min": 30000, "max": 200000, "unit": "円/月" } },
-        { "name": "コンテンツマーケティング", "priceRange": { "min": 30000, "max": 200000, "unit": "円/月" } },
-        { "name": "インフルエンサー施策", "priceRange": { "min": 30000, "max": 500000, "unit": "円" } }
-      ]
-    },
-    {
-      "id": "cw_photo",
-      "name": "写真・撮影",
-      "priceRange": { "min": 20000, "max": 100000, "unit": "円", "note": "写真撮影：20,000円〜、写真加工：1,000円〜/枚" },
-      "subcategories": [
-        { "name": "商品・物撮り", "priceRange": { "min": 20000, "max": 100000, "unit": "円" } },
-        { "name": "人物・モデル撮影", "priceRange": { "min": 30000, "max": 200000, "unit": "円" } },
-        { "name": "写真レタッチ・加工", "priceRange": { "min": 1000, "max": 5000, "unit": "円/枚" } }
+        { "name": "ネーミング募集" },
+        { "name": "キャッチコピー・コピーライティング" },
+        { "name": "企画・プロモアイデア募集" },
+        { "name": "商品企画" },
+        { "name": "名前募集" }
       ]
     },
     {
       "id": "cw_translation",
       "name": "翻訳・通訳",
-      "priceRange": { "min": 6, "max": 15, "unit": "円/文字", "note": "英語・中国語・韓国語翻訳：6円〜/文字" },
       "subcategories": [
-        { "name": "日英翻訳", "priceRange": { "min": 6, "max": 15, "unit": "円/文字" } },
-        { "name": "英日翻訳", "priceRange": { "min": 6, "max": 15, "unit": "円/文字" } },
-        { "name": "多言語翻訳", "priceRange": { "min": 6, "max": 20, "unit": "円/文字" } }
+        { "name": "英語通訳・英文翻訳" },
+        { "name": "中国語翻訳" },
+        { "name": "韓国語翻訳" },
+        { "name": "フランス語翻訳" },
+        { "name": "ドイツ語翻訳" },
+        { "name": "スペイン語翻訳" },
+        { "name": "イタリア語翻訳" },
+        { "name": "ポルトガル語翻訳" },
+        { "name": "ロシア語翻訳" },
+        { "name": "タイ語翻訳" },
+        { "name": "タガログ語翻訳" },
+        { "name": "アラビア語翻訳" },
+        { "name": "映像翻訳・メディア翻訳・出版翻訳" },
+        { "name": "同時通訳・電話通訳" },
+        { "name": "海外コールセンター" }
       ]
     },
     {
-      "id": "cw_data",
-      "name": "データ入力・調査",
-      "priceRange": { "min": 1000, "max": 5000, "unit": "円/時間", "note": "データ入力：1,000円〜/時間" },
+      "id": "cw_marketing",
+      "name": "マーケティング・SNS・集客",
       "subcategories": [
-        { "name": "データ入力・整理", "priceRange": { "min": 1000, "max": 3000, "unit": "円/時間" } },
-        { "name": "リサーチ・市場調査", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } },
-        { "name": "スクレイピング・データ収集", "priceRange": { "min": 50000, "max": 300000, "unit": "円" } }
+        { "name": "WEBマーケティング・集客・SEM" },
+        { "name": "営業・広告・PR" },
+        { "name": "Instagram・Twitter・Facebook集客" },
+        { "name": "その他SNS集客・運用" },
+        { "name": "セールス・営業支援" },
+        { "name": "広告・宣伝" },
+        { "name": "コンサルティング" },
+        { "name": "ITコンサルティング" },
+        { "name": "経営戦略・経営コンサルティング" },
+        { "name": "セミナー・ウェビナー・イベント企画" }
+      ]
+    },
+    {
+      "id": "cw_business",
+      "name": "ビジネスサポート・事務",
+      "subcategories": [
+        { "name": "ビジネスサポート" },
+        { "name": "リサーチ・分析・解析" },
+        { "name": "秘書業務" },
+        { "name": "ビジネス・財務会計・知財" },
+        { "name": "マネー・ライフプラン" },
+        { "name": "建築・不動産" },
+        { "name": "相談・講師・アドバイス" }
+      ]
+    },
+    {
+      "id": "cw_task",
+      "name": "カンタン作業・データ入力",
+      "subcategories": [
+        { "name": "データ作成・入力" },
+        { "name": "質問・アンケート・テスト" },
+        { "name": "内職・軽作業" },
+        { "name": "各種代行" },
+        { "name": "データ分類・カテゴリ分け" },
+        { "name": "写真・動画" },
+        { "name": "その他（カンタン作業）" }
+      ]
+    },
+    {
+      "id": "cw_hourly",
+      "name": "時間単価制",
+      "subcategories": [
+        { "name": "開発（時間単価制）" },
+        { "name": "デザイン（時間単価制）" },
+        { "name": "ライティング（時間単価制）" },
+        { "name": "事務（時間単価制）" }
       ]
     }
   ],
   "lancers": [
     {
-      "id": "la_web_design",
-      "name": "Webデザイン",
-      "priceRange": { "min": 50000, "max": 400000, "unit": "円", "note": "LP制作：50,000〜100,000円、ホームページ：50,000〜400,000円" },
-      "subcategories": [
-        { "name": "Webサイトデザイン", "priceRange": { "min": 50000, "max": 400000, "unit": "円" } },
-        { "name": "LP制作", "priceRange": { "min": 50000, "max": 100000, "unit": "円" } },
-        { "name": "バナー制作", "priceRange": { "min": 10000, "max": 40000, "unit": "円" } },
-        { "name": "UI/UXデザイン", "priceRange": { "min": 150000, "max": 200000, "unit": "円" } },
-        { "name": "ワイヤーフレーム", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } }
-      ]
-    },
-    {
-      "id": "la_web_dev",
-      "name": "Web制作・開発",
-      "priceRange": { "min": 50000, "max": 800000, "unit": "円", "note": "WordPress：50,000〜200,000円、Webシステム：3,500〜7,000円/時間" },
-      "subcategories": [
-        { "name": "Webサイト制作", "priceRange": { "min": 50000, "max": 400000, "unit": "円" } },
-        { "name": "WordPress", "priceRange": { "min": 50000, "max": 200000, "unit": "円" } },
-        { "name": "ECサイト", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } },
-        { "name": "フロントエンド開発", "priceRange": { "min": 3500, "max": 7000, "unit": "円/時間" } },
-        { "name": "バックエンド開発", "priceRange": { "min": 3500, "max": 7000, "unit": "円/時間" } }
-      ]
-    },
-    {
-      "id": "la_app_dev",
-      "name": "アプリ開発",
-      "priceRange": { "min": 300000, "max": 2000000, "unit": "円", "note": "モバイルアプリ：300,000〜2,000,000円" },
-      "subcategories": [
-        { "name": "iOSアプリ", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
-        { "name": "Androidアプリ", "priceRange": { "min": 300000, "max": 2000000, "unit": "円" } },
-        { "name": "Webアプリ", "priceRange": { "min": 100000, "max": 800000, "unit": "円" } }
-      ]
-    },
-    {
-      "id": "la_video",
-      "name": "動画・アニメ",
-      "priceRange": { "min": 5000, "max": 500000, "unit": "円", "note": "YouTube：5,000〜30,000円/本、ショート動画：5,000〜10,000円/本" },
-      "subcategories": [
-        { "name": "動画編集", "priceRange": { "min": 5000, "max": 30000, "unit": "円/本" } },
-        { "name": "アニメーション制作", "priceRange": { "min": 50000, "max": 500000, "unit": "円" } },
-        { "name": "YouTube・SNS動画", "priceRange": { "min": 5000, "max": 30000, "unit": "円/本" } },
-        { "name": "ショート動画", "priceRange": { "min": 5000, "max": 10000, "unit": "円/本" } },
-        { "name": "サムネイル作成", "priceRange": { "min": 3000, "max": 15000, "unit": "円/枚" } }
-      ]
-    },
-    {
-      "id": "la_design",
-      "name": "デザイン・イラスト",
-      "priceRange": { "min": 25000, "max": 106500, "unit": "円", "note": "ロゴ：25,000〜85,000円、チラシ：62,500〜106,500円" },
-      "subcategories": [
-        { "name": "ロゴ制作", "priceRange": { "min": 25000, "max": 85000, "unit": "円" } },
-        { "name": "チラシ・印刷物", "priceRange": { "min": 62500, "max": 106500, "unit": "円" } },
-        { "name": "SNS用デザイン", "priceRange": { "min": 5000, "max": 30000, "unit": "円" } },
-        { "name": "イラスト・キャラクター", "priceRange": { "min": 30000, "max": 50000, "unit": "円" } },
-        { "name": "パッケージデザイン", "priceRange": { "min": 50000, "max": 200000, "unit": "円" } }
-      ]
-    },
-    {
-      "id": "la_writing",
-      "name": "ライティング・翻訳",
-      "priceRange": { "min": 0.5, "max": 5, "unit": "円/文字", "note": "記事：0.5〜5.0円/文字、キャッチコピー：30,000〜60,000円" },
-      "subcategories": [
-        { "name": "記事・ブログ作成", "priceRange": { "min": 0.5, "max": 5, "unit": "円/文字" } },
-        { "name": "コピーライティング", "priceRange": { "min": 30000, "max": 60000, "unit": "円" } },
-        { "name": "SNS文章作成", "priceRange": { "min": 5000, "max": 30000, "unit": "円/月" } },
-        { "name": "翻訳", "priceRange": { "min": 5, "max": 8, "unit": "円/ワード" } },
-        { "name": "校正・校閲", "priceRange": { "min": 10000, "max": 50000, "unit": "円/記事" } }
-      ]
-    },
-    {
       "id": "la_marketing",
-      "name": "マーケティング",
-      "priceRange": { "min": 50000, "max": 300000, "unit": "円/月", "note": "SNS運用代行：50,000〜300,000円/月" },
+      "name": "営業・マーケティング・リサーチ・広報",
       "subcategories": [
-        { "name": "SNS運用", "priceRange": { "min": 50000, "max": 300000, "unit": "円/月" } },
-        { "name": "広告運用", "priceRange": { "min": 100000, "max": 300000, "unit": "円/月" } },
-        { "name": "SEO・コンテンツ", "priceRange": { "min": 50000, "max": 200000, "unit": "円/月" } },
-        { "name": "マーケティング戦略", "priceRange": { "min": 150000, "max": 300000, "unit": "円" } }
+        { "name": "SNSアカウント運用・設定" },
+        { "name": "SNS広告運用" },
+        { "name": "SNSコンサルティング" },
+        { "name": "SNSの宣伝・バイラル" },
+        { "name": "インフルエンサー" },
+        { "name": "動画コンサルティング" },
+        { "name": "動画広告運用" },
+        { "name": "動画SEO" },
+        { "name": "SEO・SEM対策" },
+        { "name": "ローカルSEO (MEO)・地域集客" },
+        { "name": "SEOキーワード選定・リサーチ" },
+        { "name": "SEO内部対策" },
+        { "name": "SEO外部対策" },
+        { "name": "リスティング・ディスプレイ広告運用" },
+        { "name": "CRMコンサルティング" },
+        { "name": "営業コンサルティング" },
+        { "name": "営業・テレアポ代行" },
+        { "name": "営業リスト作成" },
+        { "name": "メール・フォーム送信代行" },
+        { "name": "ブランディング" },
+        { "name": "マーケティング企画" },
+        { "name": "経営企画・事業企画" },
+        { "name": "広告・PR・パブリシティ・宣伝" },
+        { "name": "商品企画・アイデア募集" },
+        { "name": "市場調査・マーケットリサーチ" },
+        { "name": "競合分析" },
+        { "name": "データ分析・統計解析" },
+        { "name": "調査・リサーチ" },
+        { "name": "取材・インタビュー" },
+        { "name": "ミステリーショッパー・覆面調査" },
+        { "name": "アクセス解析・データ分析" },
+        { "name": "Webディレクション・プロデュース" },
+        { "name": "カスタマーサポート・メールサポート" },
+        { "name": "コールセンター管理・運営" }
       ]
     },
     {
-      "id": "la_photo",
-      "name": "写真・撮影",
-      "priceRange": { "min": 5000, "max": 20000, "unit": "円/時間", "note": "写真撮影：5,000〜20,000円/時間、画像加工：100〜5,000円/枚" },
+      "id": "la_system",
+      "name": "システム開発・運用",
       "subcategories": [
-        { "name": "商品撮影", "priceRange": { "min": 5000, "max": 20000, "unit": "円/時間" } },
-        { "name": "人物撮影", "priceRange": { "min": 5000, "max": 20000, "unit": "円/時間" } },
-        { "name": "写真加工・レタッチ", "priceRange": { "min": 100, "max": 5000, "unit": "円/枚" } }
+        { "name": "ChatGPT開発" },
+        { "name": "AIチャットボット開発" },
+        { "name": "機械学習・ディープラーニング" },
+        { "name": "AIアノテーション" },
+        { "name": "Webシステム開発・プログラミング" },
+        { "name": "ソフトウェア・業務システム開発" },
+        { "name": "顧客管理・CRMシステム開発" },
+        { "name": "受発注システム開発" },
+        { "name": "予約システム開発" },
+        { "name": "勤怠管理システム開発" },
+        { "name": "Excelマクロ作成・VBA開発" },
+        { "name": "データベース設計・構築" },
+        { "name": "サーバー・ネットワーク構築" },
+        { "name": "コード・バグ修正" },
+        { "name": "メタバース開発" },
+        { "name": "ゲーム制作・開発" },
+        { "name": "iPhone・iPadアプリ開発" },
+        { "name": "Androidアプリ開発" },
+        { "name": "携帯アプリ・モバイル開発" },
+        { "name": "Windowsアプリケーション開発" },
+        { "name": "Macアプリケーション開発" },
+        { "name": "システム管理・保守・運用" },
+        { "name": "Webサイト更新・保守" },
+        { "name": "テスト・デバッグ・検証・評価" },
+        { "name": "ハードウェア機構設計・機械設計" },
+        { "name": "回路設計・組み込みソフト開発" },
+        { "name": "CAE（解析・シミュレーション）" },
+        { "name": "電子工作" }
       ]
     },
     {
       "id": "la_business",
-      "name": "ビジネス・コンサル",
-      "priceRange": { "min": 100000, "max": 300000, "unit": "円", "note": "経営コンサル：150,000〜300,000円、Web/ITコンサル：100,000〜200,000円" },
+      "name": "事務・バックオフィス・コンサルティング",
       "subcategories": [
-        { "name": "事業計画・資料作成", "priceRange": { "min": 30000, "max": 100000, "unit": "円" } },
-        { "name": "データ分析・調査", "priceRange": { "min": 50000, "max": 200000, "unit": "円" } },
-        { "name": "業務効率化・DX", "priceRange": { "min": 100000, "max": 300000, "unit": "円" } }
+        { "name": "経営・戦略コンサルティング" },
+        { "name": "Web・ITコンサルティング" },
+        { "name": "キャリア・人材コンサルティング" },
+        { "name": "その他専門コンサルティング" },
+        { "name": "生成AIカスタムプロンプト作成" },
+        { "name": "秘書・オンラインアシスタント" },
+        { "name": "人事・採用・面接代行" },
+        { "name": "経理・財務・税務・労務・ビジネス会計" },
+        { "name": "パワーポイント・スライド作成" },
+        { "name": "Excel（エクセル）作成" },
+        { "name": "Word（ワード）作成" },
+        { "name": "Access（アクセス）作成" }
       ]
     },
     {
-      "id": "la_data",
-      "name": "データ・リサーチ",
-      "priceRange": { "min": 1000, "max": 10000, "unit": "円/100件", "note": "データ収集・入力：1,000〜10,000円/100件" },
+      "id": "la_video",
+      "name": "写真撮影・動画制作・ナレーション",
       "subcategories": [
-        { "name": "データ入力", "priceRange": { "min": 1000, "max": 5000, "unit": "円/100件" } },
-        { "name": "リサーチ・調査", "priceRange": { "min": 5000, "max": 30000, "unit": "円" } },
-        { "name": "データ収集・整理", "priceRange": { "min": 1000, "max": 10000, "unit": "円/100件" } }
+        { "name": "YouTube動画編集・加工" },
+        { "name": "ショート動画編集・短尺動画制作" },
+        { "name": "商品紹介動画・サービス紹介動画" },
+        { "name": "企業紹介・講習・PR動画の編集" },
+        { "name": "広告動画" },
+        { "name": "CM・PV・ドラマ制作" },
+        { "name": "新規動画作成" },
+        { "name": "ミュージックビデオ制作" },
+        { "name": "AR/VRコンテンツ制作・撮影" },
+        { "name": "動画撮影カメラマン・ライブ配信" },
+        { "name": "イベント動画制作" },
+        { "name": "結婚式動画制作" },
+        { "name": "写真撮影" },
+        { "name": "画像加工・写真編集・画像素材" },
+        { "name": "声優・ナレーション・朗読" },
+        { "name": "キャラクターボイス" },
+        { "name": "音声制作" },
+        { "name": "音声の編集・加工" },
+        { "name": "2Dアニメーション作成" },
+        { "name": "3Dアニメーション作成・CG制作" },
+        { "name": "キャラクターアニメーション制作" },
+        { "name": "モーショングラフィックス制作" },
+        { "name": "漫画制作・絵本作成" },
+        { "name": "作曲・音源作成・効果音制作" },
+        { "name": "BGM制作" },
+        { "name": "SE・ジングル作成" },
+        { "name": "仮歌・歌入れ" },
+        { "name": "ボカロ音楽作成" },
+        { "name": "楽器演奏の録音・音源提供" }
+      ]
+    },
+    {
+      "id": "la_web",
+      "name": "Web制作・Webデザイン",
+      "subcategories": [
+        { "name": "Webディレクション" },
+        { "name": "ホームページ作成" },
+        { "name": "Webデザイン" },
+        { "name": "ランディングページ（LP）制作" },
+        { "name": "CMS構築・WordPress制作・導入" },
+        { "name": "HTML・CSSコーディング" },
+        { "name": "UIデザイン・設計" },
+        { "name": "オウンドメディア制作" },
+        { "name": "ECサイト構築・デザイン" },
+        { "name": "EC商品ページ作成・デザイン" },
+        { "name": "ECサイト運営代行" },
+        { "name": "スマホサイト制作・構築" },
+        { "name": "サイト改修" },
+        { "name": "動画サムネイル作成" },
+        { "name": "SNSサムネイル・画像作成" },
+        { "name": "LINEリッチメニュー作成" },
+        { "name": "Webサイト運営・保守・HP更新" },
+        { "name": "SNS作成・運用" },
+        { "name": "バナー作成" },
+        { "name": "アイコン作成・ボタンデザイン" }
+      ]
+    },
+    {
+      "id": "la_design",
+      "name": "デザイン制作",
+      "subcategories": [
+        { "name": "ロゴ作成" },
+        { "name": "イラスト制作" },
+        { "name": "キャラクターデザイン・募集" },
+        { "name": "似顔絵作成" },
+        { "name": "ゲームイラスト制作" },
+        { "name": "LINEスタンプ作成" },
+        { "name": "NFTアート" },
+        { "name": "チラシ作成・フライヤーデザイン" },
+        { "name": "名刺作成" },
+        { "name": "カタログ・パンフレットデザイン" },
+        { "name": "ポスターデザイン" },
+        { "name": "パッケージ・包装デザイン" },
+        { "name": "DTPデザイン" },
+        { "name": "Tシャツ・プリントデザイン" },
+        { "name": "3Dモデリング・3Dデータ作成" },
+        { "name": "VTuber・3Dモデル作成" },
+        { "name": "アバター制作" },
+        { "name": "プロダクトデザイン・CAD" },
+        { "name": "インフォグラフィック" },
+        { "name": "看板デザイン・のぼりデザイン" },
+        { "name": "地図・案内図作成" },
+        { "name": "メニューデザイン" },
+        { "name": "POPデザイン" },
+        { "name": "装丁・ブックデザイン" },
+        { "name": "間取り図作成" },
+        { "name": "外観パース作成" },
+        { "name": "インテリアデザイン" },
+        { "name": "ウェルカムボード作成" },
+        { "name": "デザインデータ修正" }
+      ]
+    },
+    {
+      "id": "la_writing",
+      "name": "ライティング・ネーミング",
+      "subcategories": [
+        { "name": "記事作成・ブログ記事・体験談" },
+        { "name": "SEOライティング" },
+        { "name": "Webサイトコンテンツ作成" },
+        { "name": "DM・メルマガ作成・制作代行" },
+        { "name": "英文ライティング" },
+        { "name": "求人原稿作成" },
+        { "name": "インタビュー・取材" },
+        { "name": "プレスリリース作成" },
+        { "name": "ビジネス・セールスレター・スピーチ" },
+        { "name": "キャッチフレーズ・コピー" },
+        { "name": "セールスコピー" },
+        { "name": "ネーミング・名前募集" },
+        { "name": "リライト・校正・編集" },
+        { "name": "シナリオ・脚本・小説作成" },
+        { "name": "台本作成" },
+        { "name": "電子書籍制作" },
+        { "name": "書籍編集・雑誌編集" },
+        { "name": "マニュアル作成" },
+        { "name": "資料作成・レポート・論文作成" }
+      ]
+    },
+    {
+      "id": "la_task",
+      "name": "タスク・作業",
+      "subcategories": [
+        { "name": "データ収集・入力・リスト作成" },
+        { "name": "データ整理・分類・カテゴリ分け" },
+        { "name": "テープ起こし・文字起こし" },
+        { "name": "データチェック・判断" },
+        { "name": "テキスト入力・キーパンチ" },
+        { "name": "データ調査・分析・統計" },
+        { "name": "レビュー・口コミ（クチコミ）" },
+        { "name": "モニター・アンケート・質問" },
+        { "name": "写真投稿・写メール投稿" },
+        { "name": "ポスティング・DM・発送作業" },
+        { "name": "封入作業" },
+        { "name": "伝票整理" }
+      ]
+    },
+    {
+      "id": "la_translation",
+      "name": "翻訳・通訳サービス",
+      "subcategories": [
+        { "name": "英語翻訳・英文翻訳" },
+        { "name": "中国語翻訳" },
+        { "name": "韓国語翻訳" },
+        { "name": "フランス語翻訳" },
+        { "name": "スペイン語翻訳" },
+        { "name": "ドイツ語翻訳" },
+        { "name": "映像・出版・メディア翻訳" },
+        { "name": "タイ語翻訳" },
+        { "name": "ベトナム語翻訳" },
+        { "name": "ロシア語翻訳" },
+        { "name": "イタリア語翻訳" },
+        { "name": "ポルトガル語翻訳" },
+        { "name": "同時通訳・電話通訳" },
+        { "name": "その他翻訳" }
       ]
     }
   ]
